@@ -202,7 +202,7 @@ class EchoNest_Client
     * @param   EchoNestApiAbstract   $api  the API instance
     * @return  EchoNest_Client       fluent interface
     */
-    public function setApi($name, EchoNestApiAbstract $instance)
+    public function setApi($name, EchoNest_ApiInterface $instance)
     {
         $this->apis[$name] = $instance;
 

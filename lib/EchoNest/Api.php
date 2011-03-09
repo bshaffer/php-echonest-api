@@ -6,7 +6,7 @@
  * @author    Brent Shaffer <bshafs at gmail dot com>
  * @license   MIT License
  */
-abstract class EchoNest_Api
+abstract class EchoNest_Api implements EchoNest_ApiInterface
 {
   /**
    * The core EchoNest Client

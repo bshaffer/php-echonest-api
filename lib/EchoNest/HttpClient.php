@@ -25,15 +25,28 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
     'debug'       => false
   );
 
-  /**
-   * Instanciate a new request
-   *
-   * @param  array   $options  Request options
-   */
-  public function __construct(array $options = array())
-  {
-    $this->configure($options);
-  }
+    /**
+    * Instanciate a new request
+    *
+    * @param  array   $options  Request options
+    */
+    public function __construct(array $options = array())
+    {
+        $this->configure($options);
+    }
+    
+    /**
+    * Configure the request
+    *
+    * @param   array               $options  Request options
+    * @return  EchoNestApiRequest $this     Fluent interface
+    */
+    public function configure(array $options)
+    {
+        $this->options = array_merge($this->options, $options);
+
+        return $this;
+    }
   
     /**
      * Send a request to the server, receive a response
