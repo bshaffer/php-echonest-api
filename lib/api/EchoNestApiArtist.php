@@ -3,10 +3,9 @@
 require_once(dirname(__FILE__).'/EchoNestApiAbstract.php');
 
 /**
- * Getting information on specific commits,
- * the diffs they introduce, the files they've changed.
+ * Getting information on specific artists
  *
- * @link      http://develop.github.com/p/commits.html
+ * @link      http://developer.echonest.com/docs/v4/artist.html
  * @author    Brent Shaffer <bshafs at gmail dot com>
  * @license   MIT License
  */
@@ -14,7 +13,6 @@ class EchoNestApiArtist extends EchoNestApiAbstract
 {
   /**
    * Set the artist id.  The artist name OR the artist ID is required for many of the methods in this API
-   * http://developer.echonest.com/docs/v4/artist.html
    *
    * @param   string  $id           the artist ID. An Echo Nest ID or a Rosetta Stone ID
    * @return  EchoNestApiArtist     the current object instance
@@ -26,7 +24,6 @@ class EchoNestApiArtist extends EchoNestApiAbstract
   
   /**
    * Set the artist name.  The artist name OR the artist ID is required for many of the methods in this API
-   * http://developer.echonest.com/docs/v4/artist.html
    *
    * @param   string  $name         the artist name
    * @return  EchoNestApiArtist     the current object instance
