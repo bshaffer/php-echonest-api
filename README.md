@@ -29,8 +29,8 @@ Next requests will not be authenticated
 
 ## Artists
 
-Searching artists, getting artist information and music
-Wrap [EchoNest Artist API](http://developer.echonest.com/docs/v4/artist.html).
+For searching artists, getting artist information and music.
+Wraps [EchoNest Artist API](http://developer.echonest.com/docs/v4/artist.html).
 
     $artistApi = $echonest->getArtistApi();
 
@@ -87,7 +87,7 @@ Please view the documentation in this project or on http://echonest.com to see a
   
 ## Playlists
 
-Api calls for generating playlists
+Api calls for generating playlists.
 Wraps [EchoNest Playlist API](http://developer.echonest.com/docs/v4/playlist.html).
 
     $playlistApi = $echonest->getPlaylistApi();
@@ -96,7 +96,7 @@ Please view the documentation in this project or on http://echonest.com to see a
 
 ## Catalogs
 
-API calls for managing personal catalogs
+API calls for managing personal catalogs.
 Wraps [EchoNest Catalog API](http://developer.echonest.com/docs/v4/catalog.html).
 
     $catalogApi = $echonest->getCatalogApi();
