@@ -241,6 +241,10 @@ class EchoNestApiRequest
         }
         unset($parameters[$key]);
       }
+      elseif (is_bool($value)) 
+      {
+        $parameters[$key] = $value ? 'true' : 'false';
+      }
     }
      
     return http_build_query($parameters, '', '&') . $append;
