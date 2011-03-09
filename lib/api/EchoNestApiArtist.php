@@ -213,37 +213,24 @@ class EchoNestApiArtist extends EchoNestApiAbstract
   /**
    * Search artists.
    * http://developer.echonest.com/docs/v4/artist.html#search
-   * @param   integer $results          the number of results desired (0 < $results < 1000)
-   * @param   string  $bucket           audio, biographies, blogs, familiarity, hotttnesss, images, news, reviews, terms, urls, video, id:CA1234123412341234, id:musicbrainz, id:playme, or id:7digital	indicates what data should be returned with each artist
-   * @param   bool    $limit            if true, limit the results to the given idspace or catalog
-   * @param   string  $name             the name of the artist to search for
-   * @param   string  $description      a description of the artist (alt-rock,-emo,harp^2)
-   * @param   bool    $fuzzy_match      if true, a fuzzy search is performed
-   * @param   decimal $max_familiarity  the maximum familiarity for returned artists (0.0 < familiarity < 1.0)
-   * @param   decimal $min_familiarity  the minimum familiarity for returned artists (0.0 < familiarity < 1.0)
-   * @param   decimal $max_hotttnesss   the maximum hotttnesss for returned artists (0.0 < hotttnesss < 1.0)
-   * @param   decimal $min_hotttnesss   the minimum hotttnesss for returned artists (0.0 < hotttnesss < 1.0)
-   * @param   string  $sort             sort terms based upon weight or frequency (familiarity-asc, hotttnesss-asc, familiarity-desc, hotttnesss-desc)
+   * @param   array   $options          visit the documentation above to see all available options.  Some options include:
+   * -  $bucket           audio, biographies, blogs, familiarity, hotttnesss, images, news, reviews, terms, urls, video, id:CA1234123412341234, id:musicbrainz, id:playme, or id:7digital	indicates what data should be returned with each artist
+   * -  $limit            if true, limit the results to the given idspace or catalog
+   * -  $name             the name of the artist to search for
+   * -  $description      a description of the artist (alt-rock,-emo,harp^2)
+   * -  $fuzzy_match      if true, a fuzzy search is performed
+   * -  $max_familiarity  the maximum familiarity for returned artists (0.0 < familiarity < 1.0)
+   * -  $min_familiarity  the minimum familiarity for returned artists (0.0 < familiarity < 1.0)
+   * -  $max_hotttnesss   the maximum hotttnesss for returned artists (0.0 < hotttnesss < 1.0)
+   * -  $min_hotttnesss   the minimum hotttnesss for returned artists (0.0 < hotttnesss < 1.0)
+   * -  $sort             sort terms based upon weight or frequency (familiarity-asc, hotttnesss-asc, familiarity-desc, hotttnesss-desc)
    * @return  array                     array of search results
    */
-  public function search($results = 15, $bucket = null, $limit = false, $name = null, $description = null, $fuzzy_match = false, 
-    $max_familiarity = 1.0, $min_familiarity = 0.0, $max_hotttness = 1.0, $min_hotttness = 0.0, $sort = null)
+  public function search($options = array())
   {
-    $response = $this->api->get('artist/search', array(
-      'results'         => $results,
-      'bucket'          => $bucket,
-      'limit'           => $limit,
-      'name'            => $name,
-      'description'     => $description,
-      'fuzzy_match'     => $fuzzy_match,
-      'max_familiarity' => $max_familiarity,
-      'min_familiarity' => $min_familiarity,
-      'max_hotttness'   => $max_hotttness,
-      'min_hotttness'   => $min_hotttness,
-      'sort'            => $sort,
-    ));
+    $response = $this->api->get('artist/search', $options);
 
-    return $response['reviews'];
+    return $response;
   }
   
   /**
@@ -401,6 +388,6 @@ class EchoNestApiArtist extends EchoNestApiAbstract
       }
     }
     
-    return $this->api->get('artist/audio', $parameters, $options);
+    return $this->api->get($path, $parameters, $options);
   }
 }
