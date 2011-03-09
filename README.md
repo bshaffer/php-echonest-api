@@ -27,7 +27,7 @@ Cancels authentication.
 
 Next requests will not be authenticated
 
-## Arists
+## Artists
 
 Searching artists, getting artist information and music
 Wrap [EchoNest Artist API](http://developer.echonest.com/docs/v4/artist.html).
