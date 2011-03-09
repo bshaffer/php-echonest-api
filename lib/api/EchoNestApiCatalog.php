@@ -153,7 +153,7 @@ class EchoNestApiCatalog extends EchoNestApiAbstract
    * @param   string  $start          the desired index of the first result returned
    * @return  array                   response object
    */
-  public function catalogs($results = 15, $start = 0)
+  public function getList($results = 15, $start = 0)
   {
     $response = $this->api->get('catalog/feed', array(
       'results'         => $results,

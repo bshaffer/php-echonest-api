@@ -3,7 +3,7 @@
 require_once(dirname(__FILE__).'/EchoNestApiAbstract.php');
 
 /**
- * Getting information on specific artists
+ * Api calls for getting data about artists.
  *
  * @link      http://developer.echonest.com/docs/v4/artist.html
  * @author    Brent Shaffer <bshafs at gmail dot com>
