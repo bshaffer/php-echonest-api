@@ -1,7 +1,5 @@
 <?php
 
-require_once(dirname(__FILE__).'/EchoNestApiAbstract.php');
-
 /**
  * Methods for analyzing or getting info about tracks.
  *
@@ -9,7 +7,7 @@ require_once(dirname(__FILE__).'/EchoNestApiAbstract.php');
  * @author    Brent Shaffer <bshafs at gmail dot com>
  * @license   MIT License
  */
-class EchoNestApiTrack extends EchoNestApiAbstract
+class EchoNest_Api_Track extends EchoNest_Api
 {
   /**
    * Analyze a previously uploaded track with the latest version of the analyzer.
@@ -22,7 +20,7 @@ class EchoNestApiTrack extends EchoNestApiAbstract
    */
   public function analyze($id, $wait = true, $bucket = null)
   {
-    $response = $this->api->post('track/analyze', array(
+    $response = $this->client->post('track/analyze', array(
       'id'     => $id,
       'wait'   => $wait,
       'bucket' => $bucket,
@@ -41,7 +39,7 @@ class EchoNestApiTrack extends EchoNestApiAbstract
    */
   public function analyzeMd5($md5, $wait = true, $bucket = null)
   {
-    $response = $this->api->post('track/analyze', array(
+    $response = $this->client->post('track/analyze', array(
       'md5'    => $md5,
       'wait'   => $wait,
       'bucket' => $bucket,
@@ -60,7 +58,7 @@ class EchoNestApiTrack extends EchoNestApiAbstract
    */
   public function profile($id, $bucket = null)
   {
-    $response = $this->api->get('track/profile', array(
+    $response = $this->client->get('track/profile', array(
       'id'     => $id,
       'bucket' => $bucket,
     ));
@@ -77,7 +75,7 @@ class EchoNestApiTrack extends EchoNestApiAbstract
    */
   public function profileMd5($md5, $bucket = null)
   {
-    $response = $this->api->get('track/profile', array(
+    $response = $this->client->get('track/profile', array(
       'md5'    => $md5,
       'wait'   => $wait,
       'bucket' => $bucket,
@@ -98,7 +96,7 @@ class EchoNestApiTrack extends EchoNestApiAbstract
    */
   public function upload($url, $wait = true, $filetype = null, $bucket = null, $track = null)
   {
-    $response = $this->api->post('track/upload', array(
+    $response = $this->client->post('track/upload', array(
       'urk'      => $url,
       'wait'     => $wait,
       'filetype' => $filetype,

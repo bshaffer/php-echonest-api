@@ -1,7 +1,5 @@
 <?php
 
-require_once(dirname(__FILE__).'/EchoNestApiAbstract.php');
-
 /**
  * Api calls for getting data about songs.
  *
@@ -9,7 +7,7 @@ require_once(dirname(__FILE__).'/EchoNestApiAbstract.php');
  * @author    Brent Shaffer <bshafs at gmail dot com>
  * @license   MIT License
  */
-class EchoNestApiSong extends EchoNestApiAbstract
+class EchoNest_Api_Song extends EchoNest_Api
 {
   /**
    * Search for songs given different query types
@@ -20,7 +18,7 @@ class EchoNestApiSong extends EchoNestApiAbstract
    */
   public function search($options)
   {
-    $response = $this->api->get('song/search', $options);
+    $response = $this->client->get('song/search', $options);
 
     return $response['songs'];
   }
@@ -36,7 +34,7 @@ class EchoNestApiSong extends EchoNestApiAbstract
    */
   public function profile($id, $bucket = null, $limit = false)
   {
-    $response = $this->api->get('song/profile', array(
+    $response = $this->client->get('song/profile', array(
       'id'     => $id,
       'bucket' => $bucket,
       'limit'  => $limit,
@@ -54,10 +52,10 @@ class EchoNestApiSong extends EchoNestApiAbstract
   public function identify($options)
   {
     if (isset($options['query'])) {
-      $response = $this->api->post('song/indentify', $options);
+      $response = $this->client->post('song/indentify', $options);
     }
     else {
-      $response = $this->api->get('song/indentify', $options);
+      $response = $this->client->get('song/indentify', $options);
     }
 
     return $response['songs'];

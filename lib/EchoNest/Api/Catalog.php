@@ -1,7 +1,5 @@
 <?php
 
-require_once(dirname(__FILE__).'/EchoNestApiAbstract.php');
-
 /**
  * API calls for managing personal catalogs
  *
@@ -9,7 +7,7 @@ require_once(dirname(__FILE__).'/EchoNestApiAbstract.php');
  * @author    Brent Shaffer <bshafs at gmail dot com>
  * @license   MIT License
  */
-class EchoNestApiCatalog extends EchoNestApiAbstract
+class EchoNest_Api_Catalog extends EchoNest_Api
 {
   /**
    * Creates a catalog.
@@ -21,7 +19,7 @@ class EchoNestApiCatalog extends EchoNestApiAbstract
    */
   public function create($name, $type)
   {
-    $response = $this->api->post('catalog/create', array(
+    $response = $this->client->post('catalog/create', array(
       'name'    => $name,
       'type'    => $type
     ));
@@ -41,7 +39,7 @@ class EchoNestApiCatalog extends EchoNestApiAbstract
    */
   public function update($name, $data, $data_type = 'json')
   {
-    $response = $this->api->post('catalog/update', array(
+    $response = $this->client->post('catalog/update', array(
       'id'        => $id,
       'data'      => $data,
       'data_type' => $data_type,
@@ -59,7 +57,7 @@ class EchoNestApiCatalog extends EchoNestApiAbstract
    */
   public function status($ticket)
   {
-    $response = $this->api->get('catalog/status', array(
+    $response = $this->client->get('catalog/status', array(
       'ticket'     => $ticket,
     ));
 
@@ -76,7 +74,7 @@ class EchoNestApiCatalog extends EchoNestApiAbstract
    */
   public function profile($id, $byName = false)
   {
-    $response = $this->api->get('catalog/profile', array(
+    $response = $this->client->get('catalog/profile', array(
       $byName ? 'id' : name => $id,
     ));
 
@@ -95,7 +93,7 @@ class EchoNestApiCatalog extends EchoNestApiAbstract
    */
   public function read($id, $results = 15, $start = 0, $bucket = null)
   {
-    $response = $this->api->get('catalog/read', array(
+    $response = $this->client->get('catalog/read', array(
       'id'              => $id,
       'results'         => $results,
       'start'           => $start,
@@ -118,7 +116,7 @@ class EchoNestApiCatalog extends EchoNestApiAbstract
    */
   public function feed($id, $results = 15, $start = 0, $bucket = null, $since = null)
   {
-    $response = $this->api->get('catalog/feed', array(
+    $response = $this->client->get('catalog/feed', array(
       'id'              => $id,
       'results'         => $results,
       'start'           => $start,
@@ -138,7 +136,7 @@ class EchoNestApiCatalog extends EchoNestApiAbstract
    */
   public function delete($id)
   {
-    $response = $this->api->post('catalog/delete', array(
+    $response = $this->client->post('catalog/delete', array(
       'id'              => $id,
     ));
 
@@ -155,7 +153,7 @@ class EchoNestApiCatalog extends EchoNestApiAbstract
    */
   public function getList($results = 15, $start = 0)
   {
-    $response = $this->api->get('catalog/feed', array(
+    $response = $this->client->get('catalog/feed', array(
       'results'         => $results,
       'start'           => $start,
     ));

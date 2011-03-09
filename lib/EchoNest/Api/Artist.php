@@ -1,7 +1,5 @@
 <?php
 
-require_once(dirname(__FILE__).'/EchoNestApiAbstract.php');
-
 /**
  * Api calls for getting data about artists.
  *
@@ -9,7 +7,7 @@ require_once(dirname(__FILE__).'/EchoNestApiAbstract.php');
  * @author    Brent Shaffer <bshafs at gmail dot com>
  * @license   MIT License
  */
-class EchoNestApiArtist extends EchoNestApiAbstract
+class EchoNest_Api_Artist extends EchoNest_Api
 {
   /**
    * Set the artist id.  The artist name OR the artist ID is required for many of the methods in this API
@@ -228,7 +226,7 @@ class EchoNestApiArtist extends EchoNestApiAbstract
    */
   public function search($options = array())
   {
-    $response = $this->api->get('artist/search', $options);
+    $response = $this->client->get('artist/search', $options);
 
     return $response;
   }
@@ -310,7 +308,7 @@ class EchoNestApiArtist extends EchoNestApiAbstract
    */
   public function getTopHottt($results = 15, $start = 0, $bucket = null, $limit = false)
   {
-    $response = $this->api->get('artist/top_hottt', array(
+    $response = $this->client->get('artist/top_hottt', array(
       'results'         => $results,
       'start'           => $start,
       'bucket'          => $bucket,
@@ -329,7 +327,7 @@ class EchoNestApiArtist extends EchoNestApiAbstract
    */
   public function getTopTerms($results = 15)
   {
-    $response = $this->api->get('artist/top_hottt', array(
+    $response = $this->client->get('artist/top_hottt', array(
       'results'         => $results,
       'start'           => $start,
       'bucket'          => $bucket,
@@ -388,6 +386,6 @@ class EchoNestApiArtist extends EchoNestApiAbstract
       }
     }
     
-    return $this->api->get($path, $parameters, $options);
+    return $this->client->get($path, $parameters, $options);
   }
 }

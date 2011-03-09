@@ -1,42 +1,13 @@
 <?php
 
-require_once(dirname(__FILE__).'/EchoNestApiRequestException.php');
-
 /**
  * Performs requests on GitHub API. API documentation should be self-explanatory.
  *
  * @author    Brent Shaffer <bshafs at gmail dot com>
  * @license   MIT License
  */
-class EchoNestApiRequest
+class EchoNest_HttpClient_Curl extends EchoNest_HttpClient
 {
-  /**
-   * The request options
-   * @var array
-   */
-  protected $options = array(
-    'protocol'    => 'http',
-    'api_version' => 'v4',
-    'url'         => ':protocol://developer.echonest.com/api/:api_version/:path',
-    'user_agent'  => 'php-echonest-api (http://github.com/bshaffer/php-echonest-api)',
-    'http_port'   => 80,
-    'timeout'     => 20,
-    'api_key'     => null,
-    'format'      => 'json',
-    'limit'       => false,
-    'debug'       => false
-  );
-
-  /**
-   * Instanciate a new request
-   *
-   * @param  array   $options  Request options
-   */
-  public function __construct(array $options = array())
-  {
-    $this->configure($options);
-  }
-
   /**
    * Configure the request
    *
@@ -80,49 +51,6 @@ class EchoNestApiRequest
   }
 
   /**
-   * Send a GET request
-   * @see send
-   */
-  public function get($apiPath, array $parameters = array(), array $options = array())
-  {
-    return $this->send($apiPath, $parameters, 'GET', $options);
-  }
-
-  /**
-   * Send a POST request
-   * @see send
-   */
-  public function post($apiPath, array $parameters = array(), array $options = array())
-  {
-    return $this->send($apiPath, $parameters, 'POST', $options);
-  }
-
-  /**
-   * Get a JSON response and transform it to a PHP array
-   *
-   * @return  array   the response
-   */
-  protected function decodeResponse($response)
-  {
-    switch ($this->options['format']) 
-    {
-      case 'json':
-        return json_decode($response, true);
-
-      case 'jsonp':
-        throw new Exception("format 'jsonp' not yet supported by this library");
-
-      case 'xml':
-        throw new Exception("format 'xml' not yet supported by this library");
-
-      case 'xspf':
-        throw new Exception("format 'xspf' not yet supported by this library");
-    }
-
-    throw new Exception(__CLASS__.' only supports json, json, xml, and xspf formats, '.$this->options['format'].' given.');
-  }
-
-  /**
    * Send a request to the server, receive a response
    *
    * @param  string   $apiPath       Request API path
@@ -131,14 +59,8 @@ class EchoNestApiRequest
    *
    * @return string   HTTP response
    */
-  public function doSend($apiPath, array $parameters = array(), $httpMethod = 'GET')
+  public function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
   {
-    $url = strtr($this->options['url'], array(
-      ':api_version' => $this->options['api_version'],
-      ':protocol'    => $this->options['protocol'],
-      ':path'        => trim($apiPath, '/')
-    ));
-
     if($this->options['api_key'])
     {
       $parameters = array_merge(array(
@@ -190,42 +112,15 @@ class EchoNestApiRequest
 
     if (!in_array($headers['http_code'], array(0, 200, 201)))
     {
-      throw new EchoNestApiRequestException(null, (int) $headers['http_code']);
+      throw new EchoNest_HttpClient_Exception(null, (int) $headers['http_code']);
     }
 
     if ($errorNumber != '')
     {
-      throw new EchoNestApiRequestException($errorMessage, $errorNumber);
+      throw new EchoNest_HttpClient_Exception($errorMessage, $errorNumber);
     }
 
     return $response;
-  }
-
-  /**
-   * Change an option value.
-   *
-   * @param string $name   The option name
-   * @param mixed  $value  The value
-   *
-   * @return dmConfigurable The current object instance
-   */
-  public function setOption($name, $value)
-  {
-    $this->options[$name] = $value;
-
-    return $this;
-  }
-
-  /**
-   * Get an option value.
-   *
-   * @param  string $name The option name
-   *
-   * @return mixed  The option value
-   */
-  public function getOption($name, $default = null)
-  {
-    return isset($this->options[$name]) ? $this->options[$name] : $default;
   }
   
   protected function buildQuery($parameters)
@@ -252,7 +147,7 @@ class EchoNestApiRequest
 
   protected function debug($message)
   {
-    if($this->options['debug'])
+    // if($this->options['debug'])
     {
       print $message."\n";
     }

@@ -1,24 +1,24 @@
 <?php
 
 /**
- * Abstract class for EchoNestApi classes
+ * Abstract class for EchoNest_Api classes
  *
  * @author    Brent Shaffer <bshafs at gmail dot com>
  * @license   MIT License
  */
-abstract class EchoNestApiAbstract
+abstract class EchoNest_Api
 {
   /**
-   * The core API
-   * @var EchoNestApiAbstract
+   * The core EchoNest Client
+   * @var EchoNest_Client
    */
   protected 
-    $api,
+    $client,
     $options = array();
 
-  public function __construct(EchoNestApi $api, $options = array())
+  public function __construct(EchoNest_Client $client, $options = array())
   {
-    $this->api     = $api;
+    $this->client  = $client;
     $this->options = $options;
   }
 

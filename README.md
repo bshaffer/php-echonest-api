@@ -5,13 +5,29 @@ This library is modeled after the [php-github-api](https://github.com/ornicar/ph
 
 Uses [EchoNest API v4](http://developer.echonest.com/docs/v4/).
 
-Requires [php curl](http://php.net/manual/en/book.curl.php).
+Requires
+
+ * PHP 5.2 or 5.3.
+ * [php curl](http://php.net/manual/en/book.curl.php) but it is possible to write another transport layer..
 
 If the method you need does not exist yet, dont hesitate to request it with an [issue](http://github.com/bshaffer/php-echonest-api/issues)!
 
-## Instanciate a new API
+## Autoload
 
-    $echonest = new EchoNestApi();
+The first step to use php-echonest-api is to register its autoloader:
+
+    require_once '/path/to/lib/EchoNest/Autoloader.php';
+    EchoNest_Autoloader::register();
+
+Replace the `/path/to/lib/` path with the path you used for php-echonest-api installation.
+
+> php-echonest-api follows the PEAR convention names for its classes, which means you can easily integrate php-echonest-api classes loading in your own autoloader.
+
+## Instanciate a new EchoNest Client
+
+    $echonest = new EchoNest_Client();
+
+From this object you can now access all of the different EchoNest APIs (listed below)
 
 ### Authenticate a user
 

@@ -1,7 +1,5 @@
 <?php
 
-require_once(dirname(__FILE__).'/EchoNestApiAbstract.php');
-
 /**
  * Api calls for generating playlists
  *
@@ -9,7 +7,7 @@ require_once(dirname(__FILE__).'/EchoNestApiAbstract.php');
  * @author    Brent Shaffer <bshafs at gmail dot com>
  * @license   MIT License
  */
-class EchoNestApiPlaylist extends EchoNestApiAbstract
+class EchoNest_Api_Playlist extends EchoNest_Api
 {
   /**
    * Returns a static playlist. A static playlist is generated once from an initial set of parameters, and returned as an ordered list of songs.
@@ -20,7 +18,7 @@ class EchoNestApiPlaylist extends EchoNestApiAbstract
    */
   public function getStatic(array $options = array())
   {
-    $response = $this->api->get('playlist/static', $options);
+    $response = $this->client->get('playlist/static', $options);
 
     return $response['songs'];
   }
@@ -34,7 +32,7 @@ class EchoNestApiPlaylist extends EchoNestApiAbstract
    */
   public function getDynamic(array $options = array())
   {
-    $response = $this->api->get('playlist/dynamic', $options);
+    $response = $this->client->get('playlist/dynamic', $options);
 
     return $response;
   }
@@ -48,7 +46,7 @@ class EchoNestApiPlaylist extends EchoNestApiAbstract
    */  
   public function getSessionInfo($session_id)
   {
-    $response = $this->api->get('playlist/dynamic', array(
+    $response = $this->client->get('playlist/dynamic', array(
       'session_id'  => $session_id,
     ));
 

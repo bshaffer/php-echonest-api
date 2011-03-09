@@ -6,7 +6,7 @@
  * @author    Brent Shaffer <bshafs at gmail dot com>
  * @license   MIT License
  */
-class EchoNestApiRequestException extends Exception
+class EchoNest_HttpClient_Exception extends Exception
 {
   /**
    * Http header-codes
