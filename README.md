@@ -1,6 +1,7 @@
 # PHP Echo Nest API
 
-A simple, Object Oriented API wrapper for the EchoNest Api written with PHP5.
+A simple, Object Oriented API wrapper for the EchoNest Api written with PHP5.  
+This library is modeled after the [php-github-api](https://github.com/ornicar/php-github-api) library built by [ornicar](https://github.com/ornicar)
 
 Uses [EchoNest API v4](http://developer.echonest.com/docs/v4/).
 
