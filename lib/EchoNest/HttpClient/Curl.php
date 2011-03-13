@@ -88,14 +88,9 @@ class EchoNest_HttpClient_Curl extends EchoNest_HttpClient
 
         $response = $this->doCurlCall($curlOptions);
 
-        if (!in_array($response['headers']['http_code'], array(0, 200, 201))) {
-            throw new EchoNest_HttpClient_Exception(null, (int) $response['headers']['http_code']);
+        if (!in_array($response['response']['status']['code'], array(0, 200, 201))) {
+            throw new EchoNest_HttpClient_Exception($response['response']['status']['message'], (int) $response['headers']['http_code']);
         }
-
-        if ($response['errorNumber'] != '') {
-            throw new EchoNest_HttpClient_Exception('error '.$response['errorNumber']);
-        }
-
 
         return $response['response'];
     }

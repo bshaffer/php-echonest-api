@@ -36,13 +36,11 @@ class EchoNest_Api_Artist extends EchoNest_Api
      * http://developer.echonest.com/docs/v4/artist.html#audio
      *
      * @param   integer $results        the number of results desired (0 < $results < 100)
-     * @param   string  $start        the desired index of the first result returned
+     * @param   integer $start        the desired index of the first result returned
      * @return  array                 list of audio documents found
      */
     public function getAudio($results = 15, $start = 0)
     {
-        $this->setValidation(array('results' => self::INT, 'start' => self::STR));
-      
         $response = $this->getForArtist('artist/audio', array(
             'results' => $results,
             'start'   => $start,
@@ -56,12 +54,12 @@ class EchoNest_Api_Artist extends EchoNest_Api
      * http://developer.echonest.com/docs/v4/artist.html#biographies
      *
      * @param   integer $results        the number of results desired (0 < $results < 100)
-     * @param   string  $start          the desired index of the first result returned
+     * @param   integer $start          the desired index of the first result returned
      * @param   string|array $license   the desired licenses of the returned biographies
      * @return  array                   list of biographies found
      */
     public function getBiographies($results = 15, $start = 0, $license = null)
-    {
+    {        
         $response = $this->getForArtist('artist/biographies', array(
             'results' => $results,
             'start'   => $start,
@@ -76,7 +74,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
     * http://developer.echonest.com/docs/v4/artist.html#blogs
     *
     * @param   integer $results        the number of results desired (0 < $results < 100)
-    * @param   string  $start          the desired index of the first result returned
+    * @param   integer $start          the desired index of the first result returned
     * @param   bool    $high_relevance if true only items that are highly relevant for this artist will be returned
     * @return  array                   list of blogs found
     */
@@ -126,7 +124,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
     * http://developer.echonest.com/docs/v4/artist.html#images
     *
     * @param   integer $results        the number of results desired (0 < $results < 100)
-    * @param   string  $start          the desired index of the first result returned
+    * @param   integer $start          the desired index of the first result returned
     * @param   string|array $license   the desired licenses of the returned images
     * @return  array                   array of images found
     */
@@ -146,7 +144,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
     * http://developer.echonest.com/docs/v4/artist.html#news
     *
     * @param   integer $results        the number of results desired (0 < $results < 100)
-    * @param   string  $start          the desired index of the first result returned
+    * @param   integer $start          the desired index of the first result returned
     * @param   bool    $high_relevance if true only news articles that are highly relevant for this artist will be returned
     * @return  array                   array of news articles found
     */

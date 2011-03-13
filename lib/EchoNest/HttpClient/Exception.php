@@ -64,8 +64,8 @@ class EchoNest_HttpClient_Exception extends Exception
      */
     public function __construct($message = null, $code = null)
     {
-        if (null === $message && null !== $code && array_key_exists((int) $code, self::$statusCodes)){
-            $message = sprintf('HTTP %d: %s', $code, self::$statusCodes[(int) $code]);
+        if (null !== $code && array_key_exists((int) $code, self::$statusCodes)){
+            $message = sprintf('HTTP %d: %s. %s', $code, self::$statusCodes[(int) $code], $message);
         }
 
         parent::__construct($message, $code);
