@@ -8,39 +8,39 @@
  */
 abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
 {
-  /**
-   * The request options
-   * @var array
-   */
-  protected $options = array(
-    'protocol'    => 'http',
-    'api_version' => 'v4',
-    'url'         => ':protocol://developer.echonest.com/api/:api_version/:path',
-    'user_agent'  => 'php-echonest-api (http://github.com/bshaffer/php-echonest-api)',
-    'http_port'   => 80,
-    'timeout'     => 20,
-    'api_key'     => null,
-    'format'      => 'json',
-    'limit'       => false,
-    'debug'       => false
-  );
+    /**
+     * The request options
+     * @var array
+     */
+    protected $options = array(
+        'protocol'    => 'http',
+        'api_version' => 'v4',
+        'url'         => ':protocol://developer.echonest.com/api/:api_version/:path',
+        'user_agent'  => 'php-echonest-api (http://github.com/bshaffer/php-echonest-api)',
+        'http_port'   => 80,
+        'timeout'     => 20,
+        'api_key'     => null,
+        'format'      => 'json',
+        'limit'       => false,
+        'debug'       => false
+    );
 
     /**
-    * Instanciate a new request
-    *
-    * @param  array   $options  Request options
-    */
+     * Instanciate a new request
+     *
+     * @param  array   $options  Request options
+     */
     public function __construct(array $options = array())
     {
         $this->configure($options);
     }
     
     /**
-    * Configure the request
-    *
-    * @param   array               $options  Request options
-    * @return  EchoNestApiRequest $this     Fluent interface
-    */
+     * Configure the request
+     *
+     * @param   array               $options  Request options
+     * @return  EchoNestApiRequest $this     Fluent interface
+     */
     public function configure(array $options)
     {
         $this->options = array_merge($this->options, $options);
@@ -61,18 +61,18 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
     abstract protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options);
 
     /**
-    * Send a GET request
-    * @see send
-    */
+     * Send a GET request
+     * @see send
+     */
     public function get($path, array $parameters = array(), array $options = array())
     {
         return $this->request($path, $parameters, 'GET', $options);
     }
 
     /**
-    * Send a POST request
-    * @see send
-    */
+     * Send a POST request
+     * @see send
+     */
     public function post($path, array $parameters = array(), array $options = array())
     {
         return $this->request($path, $parameters, 'POST', $options);
@@ -110,13 +110,13 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
     }
 
     /**
-    * Change an option value.
-    *
-    * @param string $name   The option name
-    * @param mixed  $value  The value
-    *
-    * @return dmConfigurable The current object instance
-    */
+     * Change an option value.
+     *
+     * @param string $name   The option name
+     * @param mixed  $value  The value
+     *
+     * @return dmConfigurable The current object instance
+     */
     public function setOption($name, $value)
     {
         $this->options[$name] = $value;
@@ -125,12 +125,12 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
     }
 
     /**
-    * Get an option value.
-    *
-    * @param  string $name The option name
-    *
-    * @return mixed  The option value
-    */
+     * Get an option value.
+     *
+     * @param  string $name The option name
+     *
+     * @return mixed  The option value
+     */
     public function getOption($name, $default = null)
     {
         return isset($this->options[$name]) ? $this->options[$name] : $default;
@@ -138,10 +138,10 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
     
   
     /**
-    * Get a JSON response and transform it to a PHP array
-    *
-    * @return  array   the response
-    */
+     * Get a JSON response and transform it to a PHP array
+     *
+     * @return  array   the response
+     */
     protected function decodeResponse($response)
     {
         switch ($this->options['format']) 
@@ -150,15 +150,15 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
                 return json_decode($response, true);
 
             case 'jsonp':
-                throw new Exception("format 'jsonp' not yet supported by this library");
+                throw new LogicException("format 'jsonp' not yet supported by this library");
 
             case 'xml':
-                throw new Exception("format 'xml' not yet supported by this library");
+                throw new LogicException("format 'xml' not yet supported by this library");
 
             case 'xspf':
-                throw new Exception("format 'xspf' not yet supported by this library");
+                throw new LogicException("format 'xspf' not yet supported by this library");
         }
 
-        throw new Exception(__CLASS__.' only supports json, json, xml, and xspf formats, '.$this->options['format'].' given.');
+        throw new LogicException(__CLASS__.' only supports json, json, xml, and xspf formats, '.$this->options['format'].' given.');
     }
 }

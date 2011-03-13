@@ -9,156 +9,158 @@
  */
 class EchoNest_Api_Artist extends EchoNest_Api
 {
-  /**
-   * Set the artist id.  The artist name OR the artist ID is required for many of the methods in this API
-   *
-   * @param   string  $id           the artist ID. An Echo Nest ID or a Rosetta Stone ID
-   * @return  EchoNestApiArtist     the current object instance
-   */
-  public function setId($id)
-  {
-    return $this->setOption('id', $id);
-  }
+    /**
+     * Set the artist id.  The artist name OR the artist ID is required for many of the methods in this API
+     *
+     * @param   string  $id           the artist ID. An Echo Nest ID or a Rosetta Stone ID
+     * @return  EchoNestApiArtist     the current object instance
+     */
+    public function setId($id)
+    {
+        return $this->setOption('id', $id);
+    }
   
-  /**
-   * Set the artist name.  The artist name OR the artist ID is required for many of the methods in this API
-   *
-   * @param   string  $name         the artist name
-   * @return  EchoNestApiArtist     the current object instance
-   */
-  public function setName($name)
-  {
-    return $this->setOption('name', $name);
-  }
+    /**
+     * Set the artist name.  The artist name OR the artist ID is required for many of the methods in this API
+     *
+     * @param   string  $name         the artist name
+     * @return  EchoNestApiArtist     the current object instance
+     */
+    public function setName($name)
+    {
+        return $this->setOption('name', $name);
+    }
 
-  /**
-   * Get a list of audio documents found on the web related to an artist.
-   * http://developer.echonest.com/docs/v4/artist.html#audio
-   *
-   * @param   integer $results        the number of results desired (0 < $results < 100)
-   * @param   string  $start        the desired index of the first result returned
-   * @return  array                 list of audio documents found
-   */
-  public function getAudio($results = 15, $start = 0)
-  {
-    $response = $this->getForArtist('artist/audio', array(
-      'results' => $results,
-      'start'   => $start,
-    ));
+    /**
+     * Get a list of audio documents found on the web related to an artist.
+     * http://developer.echonest.com/docs/v4/artist.html#audio
+     *
+     * @param   integer $results        the number of results desired (0 < $results < 100)
+     * @param   string  $start        the desired index of the first result returned
+     * @return  array                 list of audio documents found
+     */
+    public function getAudio($results = 15, $start = 0)
+    {
+        $this->setValidation(array('results' => self::INT, 'start' => self::STR));
+      
+        $response = $this->getForArtist('artist/audio', array(
+            'results' => $results,
+            'start'   => $start,
+        ));
 
-    return $response['audio'];
-  }
+        return $response['audio'];
+    }
   
-  /**
-   * Get a list of artist biographies.
-   * http://developer.echonest.com/docs/v4/artist.html#biographies
-   *
-   * @param   integer $results        the number of results desired (0 < $results < 100)
-   * @param   string  $start          the desired index of the first result returned
-   * @param   string|array $license   the desired licenses of the returned biographies
-   * @return  array                   list of biographies found
-   */
-  public function getBiographies($results = 15, $start = 0, $license = null)
-  {
-    $response = $this->getForArtist('artist/biographies', array(
-      'results' => $results,
-      'start'   => $start,
-      'license' => $license,
-    ));
+    /**
+     * Get a list of artist biographies.
+     * http://developer.echonest.com/docs/v4/artist.html#biographies
+     *
+     * @param   integer $results        the number of results desired (0 < $results < 100)
+     * @param   string  $start          the desired index of the first result returned
+     * @param   string|array $license   the desired licenses of the returned biographies
+     * @return  array                   list of biographies found
+     */
+    public function getBiographies($results = 15, $start = 0, $license = null)
+    {
+        $response = $this->getForArtist('artist/biographies', array(
+            'results' => $results,
+            'start'   => $start,
+            'license' => $license,
+        ));
 
-    return $response['biographies'];
-  }
+        return $response['biographies'];
+    }
 
-  /**
-   * Get a list of blog articles related to an artist.
-   * http://developer.echonest.com/docs/v4/artist.html#blogs
-   *
-   * @param   integer $results        the number of results desired (0 < $results < 100)
-   * @param   string  $start          the desired index of the first result returned
-   * @param   bool    $high_relevance if true only items that are highly relevant for this artist will be returned
-   * @return  array                   list of blogs found
-   */
-  public function getBlogs($results = 15, $start = 0, $high_relevance = false)
-  {
-    $response = $this->getForArtist('artist/blogs', array(
-      'results'        => $results,
-      'start'          => $start,
-      'high_relevance' => $high_relevance,
-    ));
+    /**
+    * Get a list of blog articles related to an artist.
+    * http://developer.echonest.com/docs/v4/artist.html#blogs
+    *
+    * @param   integer $results        the number of results desired (0 < $results < 100)
+    * @param   string  $start          the desired index of the first result returned
+    * @param   bool    $high_relevance if true only items that are highly relevant for this artist will be returned
+    * @return  array                   list of blogs found
+    */
+    public function getBlogs($results = 15, $start = 0, $high_relevance = false)
+    {
+        $response = $this->getForArtist('artist/blogs', array(
+            'results'        => $results,
+            'start'          => $start,
+            'high_relevance' => $high_relevance,
+        ));
 
-    return $response['blogs'];
-  }
+        return $response['blogs'];
+    }
   
-  /**
-   * Get our numerical estimation of how familiar an artist currently is to the world.
-   * http://developer.echonest.com/docs/v4/artist.html#familiarity
-   *
-   * @param   string  $id             the artist ID. An Echo Nest ID or a Rosetta Stone ID
-   * @return  decimal
-   */
-  public function getFamiliarity()
-  {
-    $response = $this->getForArtist('artist/familiarity');
+    /**
+    * Get our numerical estimation of how familiar an artist currently is to the world.
+    * http://developer.echonest.com/docs/v4/artist.html#familiarity
+    *
+    * @param   string  $id             the artist ID. An Echo Nest ID or a Rosetta Stone ID
+    * @return  decimal
+    */
+    public function getFamiliarity()
+    {
+        $response = $this->getForArtist('artist/familiarity');
 
-    return $response['familiarity'];
-  }
+        return $response['familiarity'];
+    }
   
-  /**
-   * Returns our numerical description of how hottt an artist currently is. Contact us at biz@echonest.com for information on how to obtain additional hotttnesss information, including historical hotttnesss data for each artist and a detailed breakdown of hotttnesss into editorial, social and mainstream categories.
-   * http://developer.echonest.com/docs/v4/artist.html#hotttness
-   *
-   * @param   string  $type         controls the type of hotttnesss that is used (overall, social, reviews, mainstream)
-   * @return  decimal
-   */
-  public function getHotttness($type = 'overall')
-  {
-    $response = $this->getForArtist('artist/hotttness', array(
-      'type'          => $type,
-    ));
+    /**
+    * Returns our numerical description of how hottt an artist currently is. Contact us at biz@echonest.com for information on how to obtain additional hotttnesss information, including historical hotttnesss data for each artist and a detailed breakdown of hotttnesss into editorial, social and mainstream categories.
+    * http://developer.echonest.com/docs/v4/artist.html#hotttness
+    *
+    * @param   string  $type         controls the type of hotttnesss that is used (overall, social, reviews, mainstream)
+    * @return  decimal
+    */
+    public function getHotttness($type = 'overall')
+    {
+        $response = $this->getForArtist('artist/hotttness', array(
+          'type'          => $type,
+        ));
 
-    return $response['hotttnesss'];
-  }
+        return $response['hotttnesss'];
+    }
   
-  /**
-   * Get a list of artist images.
-   * http://developer.echonest.com/docs/v4/artist.html#images
-   *
-   * @param   integer $results        the number of results desired (0 < $results < 100)
-   * @param   string  $start          the desired index of the first result returned
-   * @param   string|array $license   the desired licenses of the returned images
-   * @return  array                   array of images found
-   */
-  public function getImages($results = 15, $start = 0, $license = null)
-  {
-    $response = $this->getForArtist('artist/images', array(
-      'results' => $results,
-      'start'   => $start,
-      'license' => $license,
-    ));
+    /**
+    * Get a list of artist images.
+    * http://developer.echonest.com/docs/v4/artist.html#images
+    *
+    * @param   integer $results        the number of results desired (0 < $results < 100)
+    * @param   string  $start          the desired index of the first result returned
+    * @param   string|array $license   the desired licenses of the returned images
+    * @return  array                   array of images found
+    */
+    public function getImages($results = 15, $start = 0, $license = null)
+    {
+        $response = $this->getForArtist('artist/images', array(
+            'results' => $results,
+            'start'   => $start,
+            'license' => $license,
+        ));
 
-    return $response['images'];
-  }
+        return $response['images'];
+    }
   
-  /**
-   * Get a list of news articles found on the web related to an artist.
-   * http://developer.echonest.com/docs/v4/artist.html#news
-   *
-   * @param   integer $results        the number of results desired (0 < $results < 100)
-   * @param   string  $start          the desired index of the first result returned
-   * @param   bool    $high_relevance if true only news articles that are highly relevant for this artist will be returned
-   * @return  array                   array of news articles found
-   */
-  public function getNews($results = 15, $start = 0, $high_relevance = false)
-  {
-    $response = $this->getForArtist('artist/news', array(
-      'results'         => $results,
-      'start'           => $start,
-      'high_relevance'  => $high_relevance,
-    ));
+    /**
+    * Get a list of news articles found on the web related to an artist.
+    * http://developer.echonest.com/docs/v4/artist.html#news
+    *
+    * @param   integer $results        the number of results desired (0 < $results < 100)
+    * @param   string  $start          the desired index of the first result returned
+    * @param   bool    $high_relevance if true only news articles that are highly relevant for this artist will be returned
+    * @return  array                   array of news articles found
+    */
+    public function getNews($results = 15, $start = 0, $high_relevance = false)
+    {
+        $response = $this->getForArtist('artist/news', array(
+            'results'         => $results,
+            'start'           => $start,
+            'high_relevance'  => $high_relevance,
+        ));
 
-    return $response['news'];
-  }
-  
+        return $response['news'];
+    }
+
   /**
    * Get basic information on an artist: the name, the Echo Nest ID, and the MusicBrainz ID.
    * http://developer.echonest.com/docs/v4/artist.html#profile
@@ -226,7 +228,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
    */
   public function search($options = array())
   {
-    $response = $this->client->get('artist/search', $options);
+    $response = $this->get('artist/search', $options);
 
     return $response;
   }
@@ -308,7 +310,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
    */
   public function getTopHottt($results = 15, $start = 0, $bucket = null, $limit = false)
   {
-    $response = $this->client->get('artist/top_hottt', array(
+    $response = $this->get('artist/top_hottt', array(
       'results'         => $results,
       'start'           => $start,
       'bucket'          => $bucket,
@@ -327,7 +329,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
    */
   public function getTopTerms($results = 15)
   {
-    $response = $this->client->get('artist/top_hottt', array(
+    $response = $this->get('artist/top_hottt', array(
       'results'         => $results,
       'start'           => $start,
       'bucket'          => $bucket,
@@ -382,10 +384,10 @@ class EchoNest_Api_Artist extends EchoNest_Api
         $parameters = array_merge(array('name' => $name), $parameters);
       }
       else {
-        throw new Exception('This method requires an artist id or name.  Please set this using the setId() or setName() methods on the Artist API');
+        throw new EchoNest_Api_ParameterException('This method requires an artist id or name.  Please set this using the setId() or setName() methods on the Artist API');
       }
     }
-    
-    return $this->client->get($path, $parameters, $options);
+
+    return $this->get($path, $parameters, $options);
   }
 }

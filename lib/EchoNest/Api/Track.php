@@ -75,35 +75,35 @@ class EchoNest_Api_Track extends EchoNest_Api
    */
   public function profileMd5($md5, $bucket = null)
   {
-    $response = $this->client->get('track/profile', array(
-      'md5'    => $md5,
-      'wait'   => $wait,
-      'bucket' => $bucket,
+      $response = $this->client->get('track/profile', array(
+          'md5'    => $md5,
+          'wait'   => $wait,
+          'bucket' => $bucket,
+          ));
+
+      return $response;
+  }
+
+    /**
+     * Upload a track to The Echo Nest's analyzer for analysis. The track will be analyzed. This method takes either a url parameter, or a local audio file, which should be the contents of the request body.
+     *
+     * @param   string  $url            one of url to an audio file or a local audio file
+     * @param   bool    $wait           if true wait for the analysis to be completed
+     * @param   string  $filetype       the type of audio file to be analyzed (wav, mp3, au, ogg). required if uploading a local file
+     * @param   string|array  $bucket   Indicates which track data should be returned (only valid if wait is true)
+     * @param   string  $track          the track data (required in a POST if using the 'multipart/form-data' Content-Type)
+     * @return  array                   response object
+     */
+    public function upload($url, $wait = true, $filetype = null, $bucket = null, $track = null)
+    {
+        $response = $this->client->post('track/upload', array(
+            'urk'      => $url,
+            'wait'     => $wait,
+            'filetype' => $filetype,
+            'bucket'   => $bucket,
+            'track'    => $track,
     ));
 
     return $response;
-  }
-
-  /**
-   * Upload a track to The Echo Nest's analyzer for analysis. The track will be analyzed. This method takes either a url parameter, or a local audio file, which should be the contents of the request body.
-   *
-   * @param   string  $url            one of url to an audio file or a local audio file
-   * @param   bool    $wait           if true wait for the analysis to be completed
-   * @param   string  $filetype       the type of audio file to be analyzed (wav, mp3, au, ogg). required if uploading a local file
-   * @param   string|array  $bucket   Indicates which track data should be returned (only valid if wait is true)
-   * @param   string  $track          the track data (required in a POST if using the 'multipart/form-data' Content-Type)
-   * @return  array                   response object
-   */
-  public function upload($url, $wait = true, $filetype = null, $bucket = null, $track = null)
-  {
-    $response = $this->client->post('track/upload', array(
-      'urk'      => $url,
-      'wait'     => $wait,
-      'filetype' => $filetype,
-      'bucket'   => $bucket,
-      'track'    => $track,
-    ));
-
-    return $response;
-  }
+    }
 }

@@ -8,34 +8,34 @@
  */
 class EchoNest_HttpClient_Curl extends EchoNest_HttpClient
 {
-  /**
-   * Send a request to the server, receive a response,
-   * decode the response and returns an associative array
-   *
-   * @param  string   $apiPath        Request API path
-   * @param  array    $parameters     Parameters
-   * @param  string   $httpMethod     HTTP method to use
-   * @param  array    $options        reconfigure the request for this call only
-   *
-   * @return array                    Data
-   */
-  public function send($apiPath, array $parameters = array(), $httpMethod = 'GET', array $options = array())
-  {
-    if(!empty($options))
+    /**
+    * Send a request to the server, receive a response,
+    * decode the response and returns an associative array
+    *
+    * @param  string   $apiPath        Request API path
+    * @param  array    $parameters     Parameters
+    * @param  string   $httpMethod     HTTP method to use
+    * @param  array    $options        reconfigure the request for this call only
+    *
+    * @return array                    Data
+    */
+    public function send($apiPath, array $parameters = array(), $httpMethod = 'GET', array $options = array())
     {
-      $initialOptions = $this->options;
-      $this->configure($options);
-    }
-    
-    $response = $this->decodeResponse($this->doSend($apiPath, $parameters, $httpMethod));
+        if(!empty($options))
+        {
+            $initialOptions = $this->options;
+            $this->configure($options);
+        }
 
-    if(isset($initialOptions))
-    {
-      $this->options = $initialOptions;
-    }
+        $response = $this->decodeResponse($this->doSend($apiPath, $parameters, $httpMethod));
 
-    return $response['response'];
-  }
+        if(isset($initialOptions))
+        {
+            $this->options = $initialOptions;
+        }
+
+        return $response['response'];
+    }
 
     /**
     * Send a request to the server, receive a response

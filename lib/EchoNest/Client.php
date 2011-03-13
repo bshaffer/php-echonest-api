@@ -14,21 +14,21 @@
 class EchoNest_Client
 {
     /**
-    * The request instance used to communicate with EchoNest
-    * @var EchoNest_HttpClient
-    */
+     * The request instance used to communicate with EchoNest
+     * @var EchoNest_HttpClient
+     */
     protected $httpClient  = null;
 
     /**
-    * The list of loaded API instances
-    * @var array
-    */
+     * The list of loaded API instances
+     * @var array
+     */
     protected $apis     = array();
 
     /**
-    * Use debug mode (prints debug messages)
-    * @var bool
-    */
+     * Use debug mode (prints debug messages)
+     * @var bool
+     */
     protected $debug;
 
     /**
@@ -46,11 +46,11 @@ class EchoNest_Client
     }
 
     /**
-    * Authenticate a user for all next requests
-    *
-    * @param  string         $apiKey      EchoNest API key
-    * @return EchoNestApi               fluent interface
-    */
+     * Authenticate a user for all next requests
+     *
+     * @param  string         $apiKey      EchoNest API key
+     * @return EchoNestApi               fluent interface
+     */
     public function authenticate($apiKey)
     {
         $this->getHttpClient()
@@ -60,59 +60,59 @@ class EchoNest_Client
     }
 
     /**
-    * Deauthenticate a user for all next requests
-    *
-    * @return EchoNestApi               fluent interface
-    */
+     * Deauthenticate a user for all next requests
+     *
+     * @return EchoNestApi               fluent interface
+     */
     public function deAuthenticate()
     {
         return $this->authenticate(null);
     }
   
     /**
-    * Call any route, GET method
-    * Ex: $api->get('repos/show/my-username/my-repo')
-    *
-    * @param   string  $route            the EchoNest route
-    * @param   array   $parameters       GET parameters
-    * @param   array   $requestOptions   reconfigure the request
-    * @return  array                     data returned
-    */
+     * Call any route, GET method
+     * Ex: $api->get('repos/show/my-username/my-repo')
+     *
+     * @param   string  $route            the EchoNest route
+     * @param   array   $parameters       GET parameters
+     * @param   array   $requestOptions   reconfigure the request
+     * @return  array                     data returned
+     */
     public function get($route, array $parameters = array(), $requestOptions = array())
     {
         return $this->getHttpClient()->get($route, $parameters, $requestOptions);
     }
 
     /**
-    * Call any route, POST method
-    * Ex: $api->post('repos/show/my-username', array('email' => 'my-new-email@provider.org'))
-    *
-    * @param   string  $route            the EchoNest route
-    * @param   array   $parameters       POST parameters
-    * @param   array   $requestOptions   reconfigure the request
-    * @return  array                     data returned
-    */
+     * Call any route, POST method
+     * Ex: $api->post('repos/show/my-username', array('email' => 'my-new-email@provider.org'))
+     *
+     * @param   string  $route            the EchoNest route
+     * @param   array   $parameters       POST parameters
+     * @param   array   $requestOptions   reconfigure the request
+     * @return  array                     data returned
+     */
     public function post($route, array $parameters = array(), $requestOptions = array())
     {
         return $this->getHttpClient()->post($route, $parameters, $requestOptions);
     }
 
     /**
-    * Get the httpClient
-    *
-    * @return  EchoNest_HttpClient_Interface   an httpClient instance
-    */
+     * Get the httpClient
+     *
+     * @return  EchoNest_HttpClient_Interface   an httpClient instance
+     */
     public function getHttpClient()
     {
         return $this->httpClient;
     }
 
     /**
-    * Inject another request
-    *
-    * @param   EchoNest_HttpClient_Interface   a httpClient instance
-    * @return  EchoNestApi          fluent interface
-    */
+     * Inject another request
+     *
+     * @param   EchoNest_HttpClient_Interface   a httpClient instance
+     * @return  EchoNestApi          fluent interface
+     */
     public function setHttpClient(EchoNest_HttpClient_Interface $httpClient)
     {
         $this->httpClient = $httpClient;
@@ -121,10 +121,10 @@ class EchoNest_Client
     }
 
     /**
-    * Get the artist API
-    *
-    * @return  EchoNest_Api_Artist    the artist API
-    */
+     * Get the artist API
+     *
+     * @return  EchoNest_Api_Artist    the artist API
+     */
     public function getArtistApi()
     {
         if(!isset($this->apis['artist']))
@@ -136,10 +136,10 @@ class EchoNest_Client
     }
 
     /**
-    * Get the song API
-    *
-    * @return  EchoNest_Api_Song   the song API
-    */
+     * Get the song API
+     *
+     * @return  EchoNest_Api_Song   the song API
+     */
     public function getSongApi()
     {
         if(!isset($this->apis['song']))
@@ -151,10 +151,10 @@ class EchoNest_Client
     }
 
     /**
-    * Get the track API
-    *
-    * @return  EchoNestApiTrack  the track API
-    */
+     * Get the track API
+     *
+     * @return  EchoNestApiTrack  the track API
+     */
     public function getCommitApi()
     {
         if(!isset($this->apis['track']))
@@ -166,10 +166,10 @@ class EchoNest_Client
     }
 
     /**
-    * Get the playlist API
-    *
-    * @return  EchoNestApiPlaylist  the playlist API
-    */
+     * Get the playlist API
+     *
+     * @return  EchoNestApiPlaylist  the playlist API
+     */
     public function getPlaylistApi()
     {
         if(!isset($this->apis['playlist']))
@@ -181,10 +181,10 @@ class EchoNest_Client
     }
 
     /**
-    * Get the catalog API
-    *
-    * @return  EchoNest_Api_Catalog  the catalog API
-    */
+     * Get the catalog API
+     *
+     * @return  EchoNest_Api_Catalog  the catalog API
+     */
     public function getCatalogApi()
     {
         if(!isset($this->apis['catalog']))
@@ -196,12 +196,12 @@ class EchoNest_Client
     }
 
     /**
-    * Inject another API instance
-    *
-    * @param   string                $name the API name
-    * @param   EchoNestApiAbstract   $api  the API instance
-    * @return  EchoNest_Client       fluent interface
-    */
+     * Inject another API instance
+     *
+     * @param   string                $name the API name
+     * @param   EchoNestApiAbstract   $api  the API instance
+     * @return  EchoNest_Client       fluent interface
+     */
     public function setApi($name, EchoNest_ApiInterface $instance)
     {
         $this->apis[$name] = $instance;
@@ -210,11 +210,11 @@ class EchoNest_Client
     }
 
     /**
-    * Get any API
-    *
-    * @param   string                    $name the API name
-    * @return  EchoNest_Api_Abstract     the API instance
-    */
+     * Get any API
+     *
+     * @param   string                    $name the API name
+     * @return  EchoNest_Api_Abstract     the API instance
+     */
     public function getApi($name)
     {
         return $this->apis[$name];
