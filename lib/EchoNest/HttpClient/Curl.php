@@ -9,35 +9,6 @@
 class EchoNest_HttpClient_Curl extends EchoNest_HttpClient
 {
     /**
-    * Send a request to the server, receive a response,
-    * decode the response and returns an associative array
-    *
-    * @param  string   $apiPath        Request API path
-    * @param  array    $parameters     Parameters
-    * @param  string   $httpMethod     HTTP method to use
-    * @param  array    $options        reconfigure the request for this call only
-    *
-    * @return array                    Data
-    */
-    public function send($apiPath, array $parameters = array(), $httpMethod = 'GET', array $options = array())
-    {
-        if(!empty($options))
-        {
-            $initialOptions = $this->options;
-            $this->configure($options);
-        }
-
-        $response = $this->decodeResponse($this->doSend($apiPath, $parameters, $httpMethod));
-
-        if(isset($initialOptions))
-        {
-            $this->options = $initialOptions;
-        }
-
-        return $response['response'];
-    }
-
-    /**
     * Send a request to the server, receive a response
     *
     * @param  string   $apiPath       Request API path
@@ -87,10 +58,6 @@ class EchoNest_HttpClient_Curl extends EchoNest_HttpClient
         );
 
         $response = $this->doCurlCall($curlOptions);
-
-        if (!in_array($response['response']['status']['code'], array(0, 200, 201))) {
-            throw new EchoNest_HttpClient_Exception($response['response']['status']['message'], (int) $response['headers']['http_code']);
-        }
 
         return $response['response'];
     }

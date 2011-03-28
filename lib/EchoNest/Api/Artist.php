@@ -382,7 +382,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
         $parameters = array_merge(array('name' => $name), $parameters);
       }
       else {
-        throw new EchoNest_Api_ParameterException('This method requires an artist id or name.  Please set this using the setId() or setName() methods on the Artist API');
+        throw new Exception('This method requires an artist id or name.  Please set this using the setId() or setName() methods on the Artist API');
       }
     }
 

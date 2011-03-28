@@ -3,7 +3,7 @@
 class EchoNest_Tests_Api_ArtistTest extends EchoNest_Tests_ApiTest
 {
     /**
-     * @expectedException EchoNest_Api_ParameterException
+     * @expectedException Exception
      */
     public function testGetAudioWithoutArtistNameOrIdThrowsException()
     {
