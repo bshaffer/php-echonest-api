@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Performs requests on GitHub API. API documentation should be self-explanatory.
+ * Performs requests on EchoNest API. API documentation should be self-explanatory.
  *
  * @author    Brent Shaffer <bshafs at gmail dot com>
  * @license   MIT License

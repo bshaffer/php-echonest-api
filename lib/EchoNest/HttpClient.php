@@ -3,7 +3,7 @@
 /**
  * Performs requests on EchoNest API. API documentation should be self-explanatory.
  *
- * @author    Thibault Duplessis <thibault.duplessis at gmail dot com>
+ * @author    Brent Shaffer <bshafs at gmail dot com>
  * @license   MIT License
  */
 abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface

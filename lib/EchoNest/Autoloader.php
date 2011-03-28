@@ -2,6 +2,9 @@
 
 /**
  * Autoloads EchoNest classes
+ *
+ * @author    Brent Shaffer <bshafs at gmail dot com>
+ * @license   MIT License
  */
 class EchoNest_Autoloader
 {
