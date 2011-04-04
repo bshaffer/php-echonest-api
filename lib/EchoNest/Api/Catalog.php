@@ -75,7 +75,7 @@ class EchoNest_Api_Catalog extends EchoNest_Api
   public function profile($id, $byName = false)
   {
     $response = $this->client->get('catalog/profile', array(
-      $byName ? 'id' : name => $id,
+      $byName ? 'name' : 'id' => $id,
     ));
 
     return $response['catalog'];
