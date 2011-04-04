@@ -37,7 +37,7 @@ class EchoNest_Api_Catalog extends EchoNest_Api
    * @param   string  $data       The data to be uploaded (data in the form specified by 'data_type')
    * @return  array                 response object
    */
-  public function update($name, $data, $data_type = 'json')
+  public function update($id, $data, $data_type = 'json')
   {
     $response = $this->client->post('catalog/update', array(
       'id'        => $id,
