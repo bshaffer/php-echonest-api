@@ -7,7 +7,7 @@ class EchoNest_Tests_HttpClientTest extends PHPUnit_Framework_TestCase
         $httpClient = new EchoNest_HttpClient_TestDriver(array(
             'timeout' => 33
         ));
-        
+
         $this->assertEquals(33, $httpClient->getOption('timeout'));
         $this->assertEquals(80, $httpClient->getOption('http_port'));
     }
@@ -75,7 +75,7 @@ class EchoNest_Tests_HttpClientTest extends PHPUnit_Framework_TestCase
 
 class EchoNest_HttpClient_TestDriver extends EchoNest_HttpClient
 {
-    protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options)
+    protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
     {
     }
 

@@ -34,7 +34,7 @@ class EchoNest_Tests_ClientTest extends PHPUnit_Framework_TestCase
             ->with()
             ->will($this->returnValue($httpClient));
 
-        $client->authenticate($login);
+        $client->authenticate($key);
     }
 
     public function testDeauthenticate()
