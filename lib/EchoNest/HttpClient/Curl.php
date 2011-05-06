@@ -17,7 +17,7 @@ class EchoNest_HttpClient_Curl extends EchoNest_HttpClient
     *
     * @return string   HTTP response
     */
-    public function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
+    protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array())
     {
         if($this->options['api_key'])
         {

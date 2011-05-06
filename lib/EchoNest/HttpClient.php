@@ -34,7 +34,7 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
     {
         $this->configure($options);
     }
-    
+
     /**
      * Configure the request
      *
@@ -47,7 +47,7 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
 
         return $this;
     }
-  
+
     /**
      * Send a request to the server, receive a response
      *
@@ -58,7 +58,7 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
      *
      * @return string   HTTP response
      */
-    abstract protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options);
+    abstract protected function doRequest($url, array $parameters = array(), $httpMethod = 'GET', array $options = array());
 
     /**
      * Send a GET request
@@ -77,7 +77,7 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
     {
         return $this->request($path, $parameters, 'POST', $options);
     }
-    
+
     /**
      * Send a request to the server, receive a response,
      * decode the response and returns an associative array
@@ -106,7 +106,7 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
         // decode response
         $response = $this->decodeResponse($response, $options);
 
-        if (!in_array($response['response']['status']['code'], array(0, 200, 201))) {
+        if (isset($response['response']['status']['code']) && !in_array($response['response']['status']['code'], array(0, 200, 201))) {
             throw new EchoNest_HttpClient_Exception($response['response']['status']['message'], (int) $response['headers']['http_code']);
         }
 
@@ -139,8 +139,8 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
     {
         return isset($this->options[$name]) ? $this->options[$name] : $default;
     }
-    
-  
+
+
     /**
      * Get a JSON response and transform it to a PHP array
      *
@@ -148,7 +148,7 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
      */
     protected function decodeResponse($response)
     {
-        switch ($this->options['format']) 
+        switch ($this->options['format'])
         {
             case 'json':
                 return json_decode($response, true);
