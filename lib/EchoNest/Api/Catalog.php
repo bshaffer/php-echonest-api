@@ -153,7 +153,7 @@ class EchoNest_Api_Catalog extends EchoNest_Api
    */
   public function getList($results = 15, $start = 0)
   {
-    $response = $this->client->get('catalog/feed', array(
+    $response = $this->client->get('catalog/list', array(
       'results'         => $results,
       'start'           => $start,
     ));
