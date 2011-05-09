@@ -19,7 +19,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
     {
         return $this->setOption('id', $id);
     }
-  
+
     /**
      * Set the artist name.  The artist name OR the artist ID is required for many of the methods in this API
      *
@@ -48,7 +48,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
         return $response['audio'];
     }
-  
+
     /**
      * Get a list of artist biographies.
      * http://developer.echonest.com/docs/v4/artist.html#biographies
@@ -59,7 +59,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
      * @return  array                   list of biographies found
      */
     public function getBiographies($results = 15, $start = 0, $license = null)
-    {        
+    {
         $response = $this->getForArtist('artist/biographies', array(
             'results' => $results,
             'start'   => $start,
@@ -88,7 +88,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
         return $response['blogs'];
     }
-  
+
     /**
     * Get our numerical estimation of how familiar an artist currently is to the world.
     * http://developer.echonest.com/docs/v4/artist.html#familiarity
@@ -102,7 +102,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
         return $response['familiarity'];
     }
-  
+
     /**
     * Returns our numerical description of how hottt an artist currently is. Contact us at biz@echonest.com for information on how to obtain additional hotttnesss information, including historical hotttnesss data for each artist and a detailed breakdown of hotttnesss into editorial, social and mainstream categories.
     * http://developer.echonest.com/docs/v4/artist.html#hotttness
@@ -118,7 +118,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
         return $response['hotttnesss'];
     }
-  
+
     /**
     * Get a list of artist images.
     * http://developer.echonest.com/docs/v4/artist.html#images
@@ -138,7 +138,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
         return $response['images'];
     }
-  
+
     /**
     * Get a list of news articles found on the web related to an artist.
     * http://developer.echonest.com/docs/v4/artist.html#news
@@ -163,7 +163,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
    * Get basic information on an artist: the name, the Echo Nest ID, and the MusicBrainz ID.
    * http://developer.echonest.com/docs/v4/artist.html#profile
    *
-   * @param   string|array $bucket    indicates what data should be returned with each artist. possible values include: 
+   * @param   string|array $bucket    indicates what data should be returned with each artist. possible values include:
    *  - audio,
    *  - biographies
    *  - blogs
@@ -189,7 +189,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
     return $response;
   }
-  
+
   /**
    * Get reviews related to an artist's work.
    * http://developer.echonest.com/docs/v4/artist.html#reviews
@@ -207,7 +207,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
     return $response['reviews'];
   }
-  
+
   /**
    * Search artists.
    * http://developer.echonest.com/docs/v4/artist.html#search
@@ -230,7 +230,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
     return $response;
   }
-  
+
   /**
    * Get a list of songs created by an artist.
    * http://developer.echonest.com/docs/v4/artist.html#songs
@@ -248,7 +248,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
     return $response['songs'];
   }
-  
+
   /**
    * Return similar artists given one or more artists for comparison. The Echo Nest provides up-to-the-minute artist similarity and recommendations from their real-time musical and cultural analysis of what people are saying across the Internet and what the music sounds like.
    * http://developer.echonest.com/docs/v4/artist.html#similar
@@ -267,18 +267,27 @@ class EchoNest_Api_Artist extends EchoNest_Api
    * @return  array                       array of similar artists found
    * @see     getProfile
    */
-  public function getSimilar($results = 15, $min_results = 15, $start = 0, $bucket = null, 
+  public function getSimilar($results = 15, $min_results = 15, $start = 0, $bucket = null,
     $max_familiarity = 1.0, $min_familiarity = 0.0, $max_hotttness = 1.0, $min_hotttness = 0.0,
     $reverse = false, $limit = false, $seed_catalog = null)
   {
     $response = $this->getForArtist('artist/similar', array(
-      'results'         => $results,
-      'start'           => $start,
+      'results' => $results,
+      'min_results' => $min_results,
+      'start' => $start,
+      'bucket' => $bucket,
+      'max_familiarity' => $max_familiarity,
+      'min_familiarity' => $min_familiarity,
+      'max_hotttnesss' => $max_hotttness,
+      'min_hotttnesss' => $min_hotttness,
+      'reverse' => $reverse,
+      'limit' => $limit,
+      'seed_catalog' => $seed_catalog
     ));
 
     return $response['similar'];
   }
-  
+
   /**
    * Get a list of most descriptive terms for an artist
    * http://developer.echonest.com/docs/v4/artist.html#terms
@@ -294,7 +303,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
     return $response['terms'];
   }
-  
+
   /**
    * Return a list of the top hottt artists.
    * http://developer.echonest.com/docs/v4/artist.html#top-hottt
@@ -317,7 +326,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
     return $response;
   }
-  
+
   /**
    * Returns a list of the overall top terms. Up to 1,000 terms can be returned.
    * http://developer.echonest.com/docs/v4/artist.html#top-terms
@@ -336,7 +345,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
     return $response['terms'];
   }
-  
+
   /**
    * Get links to the artist's official site, MusicBrainz site, MySpace site, Wikipedia article, Amazon list, and iTunes page.
    * http://developer.echonest.com/docs/v4/artist.html#urls
@@ -349,7 +358,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
     return $response['urls'];
   }
-  
+
   /**
    * Get links to the artist's official site, MusicBrainz site, MySpace site, Wikipedia article, Amazon list, and iTunes page.
    * http://developer.echonest.com/docs/v4/artist.html#video
@@ -367,9 +376,9 @@ class EchoNest_Api_Artist extends EchoNest_Api
 
     return $response['video'];
   }
-  
+
   /**
-   * Send a GET request for an artist.  
+   * Send a GET request for an artist.
    * This is for when an id or name attribute are required
    */
   protected function getForArtist($path, array $parameters = array(), array $options = array())
