@@ -100,7 +100,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
     {
         $response = $this->getForArtist('artist/familiarity');
 
-        return $response['familiarity'];
+        return $response['artist']['familiarity'];
     }
 
     /**
@@ -110,13 +110,13 @@ class EchoNest_Api_Artist extends EchoNest_Api
     * @param   string  $type         controls the type of hotttnesss that is used (overall, social, reviews, mainstream)
     * @return  decimal
     */
-    public function getHotttness($type = 'overall')
+    public function getHotttnesss($type = 'overall')
     {
-        $response = $this->getForArtist('artist/hotttness', array(
+        $response = $this->getForArtist('artist/hotttnesss', array(
           'type'          => $type,
         ));
 
-        return $response['hotttnesss'];
+        return $response['artist']['hotttnesss'];
     }
 
     /**
@@ -212,7 +212,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
    * Search artists.
    * http://developer.echonest.com/docs/v4/artist.html#search
    * @param   array   $options          visit the documentation above to see all available options.  Some options include:
-   * -  $bucket           audio, biographies, blogs, familiarity, hotttnesss, images, news, reviews, terms, urls, video, id:CA1234123412341234, id:musicbrainz, id:playme, or id:7digital	indicates what data should be returned with each artist
+   * -  $bucket           audio, biographies, blogs, familiarity, hotttnesss, images, news, reviews, terms, urls, video, id:CA1234123412341234, id:musicbrainz, id:playme, or id:7digital    indicates what data should be returned with each artist
    * -  $limit            if true, limit the results to the given idspace or catalog
    * -  $name             the name of the artist to search for
    * -  $description      a description of the artist (alt-rock,-emo,harp^2)
@@ -285,7 +285,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
       'seed_catalog' => $seed_catalog
     ));
 
-    return $response['similar'];
+    return $response['artists'];
   }
 
   /**
