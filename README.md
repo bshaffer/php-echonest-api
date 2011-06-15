@@ -43,46 +43,6 @@ Cancels authentication.
 
 Next requests will not be authenticated
 
-## The Response
-
-The API tries to return to you the information you typically need, and spare you information such as status codes, messages, etc, if
-the response was successful.  Below is an example of a fully rendered response.
-
-      Array
-      (
-          [status] => Array
-              (
-                  [version] => 4.2
-                  [code] => 0
-                  [message] => Success
-              )
-
-          [artists] => Array
-              (
-                  [0] => Array
-                      (
-                          [name] => Radiohead
-                          [id] => ARH6W4X1187B99274F
-                      )
-
-              )
-
-      )
-
-Often times, the status information is not needed.  However, if you would like the API to return the full response (this is often
-needed when dealing with pagers, as the "total" and "start" parameters are passed outside of the "artists" array, for example),
-set the *raw* option to `true` for your API.
-
-    // pass options to getter
-    $response = $echonest->getArtistApi(array('raw' => true))->search(array('name' => 'Radiohead'));
-
-    // set options manually
-    $artistApi = $echonest->getArtistApi();
-    $artistApi->setOption('raw', true);
-    $response = $artistApi->search(array('name' => 'Radiohead'));
-    
-If you think this is dumb, let me know and I will consider making `raw` the default.
-
 ## Artists
 
 For searching artists, getting artist information and music.
@@ -156,6 +116,47 @@ Wraps [EchoNest Track API](http://developer.echonest.com/docs/v4/track.html).
     $trackApi = $echonest->getTrackApi();
 
 Please view the documentation in this project or on http://echonest.com to see all the options available
+
+## The Response
+
+The API tries to return to you the information you typically need, and spare you information such as status codes, messages, etc, if
+the response was successful.  Below is an example of a fully rendered response.
+
+      Array
+      (
+          [status] => Array
+              (
+                  [version] => 4.2
+                  [code] => 0
+                  [message] => Success
+              )
+
+          [artists] => Array
+              (
+                  [0] => Array
+                      (
+                          [name] => Radiohead
+                          [id] => ARH6W4X1187B99274F
+                      )
+
+              )
+
+      )
+
+Often times, the status information is not needed.  However, if you would like the API to return the full response (this is often
+needed when dealing with pagers, as the "total" and "start" parameters are passed outside of the "artists" array, for example),
+set the *raw* option to `true` for your API.
+
+    // pass options to getter
+    $response = $echonest->getArtistApi(array('raw' => true))->search(array('name' => 'Radiohead'));
+
+    // set options manually
+    $artistApi = $echonest->getArtistApi();
+    $artistApi->setOption('raw', true);
+    $response = $artistApi->search(array('name' => 'Radiohead'));
+    
+If you think this is dumb, let me know and I will consider making `raw` the default.
+
 
 # To Do
 
