@@ -125,11 +125,11 @@ class EchoNest_Client
      *
      * @return  EchoNest_Api_Artist    the artist API
      */
-    public function getArtistApi()
+    public function getArtistApi($options = array())
     {
         if(!isset($this->apis['artist']))
         {
-            $this->apis['artist'] = new EchoNest_Api_Artist($this);
+            $this->apis['artist'] = new EchoNest_Api_Artist($this, $options);
         }
 
         return $this->apis['artist'];
@@ -140,11 +140,11 @@ class EchoNest_Client
      *
      * @return  EchoNest_Api_Song   the song API
      */
-    public function getSongApi()
+    public function getSongApi($options = array())
     {
         if(!isset($this->apis['song']))
         {
-            $this->apis['song'] = new EchoNest_Api_Song($this);
+            $this->apis['song'] = new EchoNest_Api_Song($this, $options);
         }
 
         return $this->apis['song'];
@@ -155,11 +155,11 @@ class EchoNest_Client
      *
      * @return  EchoNestApiTrack  the track API
      */
-    public function getCommitApi()
+    public function getCommitApi($options = array())
     {
         if(!isset($this->apis['track']))
         {
-            $this->apis['track'] = new EchoNest_Api_Track($this);
+            $this->apis['track'] = new EchoNest_Api_Track($this, $options);
         }
 
         return $this->apis['track'];
@@ -170,11 +170,11 @@ class EchoNest_Client
      *
      * @return  EchoNestApiPlaylist  the playlist API
      */
-    public function getPlaylistApi()
+    public function getPlaylistApi($options = array())
     {
         if(!isset($this->apis['playlist']))
         {
-            $this->apis['playlist'] = new EchoNest_Api_Playlist($this);
+            $this->apis['playlist'] = new EchoNest_Api_Playlist($this, $options);
         }
 
         return $this->apis['playlist'];
@@ -185,11 +185,11 @@ class EchoNest_Client
      *
      * @return  EchoNest_Api_Catalog  the catalog API
      */
-    public function getCatalogApi()
+    public function getCatalogApi($options = array())
     {
         if(!isset($this->apis['catalog']))
         {
-            $this->apis['catalog'] = new EchoNest_Api_Catalog($this);
+            $this->apis['catalog'] = new EchoNest_Api_Catalog($this, $options);
         }
 
         return $this->apis['catalog'];

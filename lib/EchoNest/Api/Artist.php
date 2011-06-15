@@ -46,7 +46,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
             'start'   => $start,
         ));
 
-        return $response['audio'];
+        return $this->returnResponse($response, 'audio');
     }
 
     /**
@@ -66,7 +66,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
             'license' => $license,
         ));
 
-        return $response['biographies'];
+        return $this->returnResponse($response, 'biographies');
     }
 
     /**
@@ -86,7 +86,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
             'high_relevance' => $high_relevance,
         ));
 
-        return $response['blogs'];
+        return $this->returnResponse($response, 'blogs');
     }
 
     /**
@@ -100,7 +100,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
     {
         $response = $this->getForArtist('artist/familiarity');
 
-        return $response['artist']['familiarity'];
+        return $this->returnResponse($this->returnResponse($response, 'familiarity'), 'artist');
     }
 
     /**
@@ -116,7 +116,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
           'type'          => $type,
         ));
 
-        return $response['artist']['hotttnesss'];
+        return $this->returnResponse($this->returnResponse($response, 'hotttnesss'), 'artist');
     }
 
     /**
@@ -136,7 +136,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
             'license' => $license,
         ));
 
-        return $response['images'];
+        return $this->returnResponse($response, 'images');
     }
 
     /**
@@ -156,7 +156,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
             'high_relevance'  => $high_relevance,
         ));
 
-        return $response['news'];
+        return $this->returnResponse($response, 'news');
     }
 
   /**
@@ -187,7 +187,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
       'bucket'         => $bucket,
     ));
 
-    return $response;
+    return $this->returnResponse($response, 'artist');
   }
 
   /**
@@ -205,7 +205,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
       'start'           => $start,
     ));
 
-    return $response['reviews'];
+    return $this->returnResponse($response, 'reviews');
   }
 
   /**
@@ -228,7 +228,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
   {
     $response = $this->get('artist/search', $options);
 
-    return $response;
+    return $this->returnResponse($response, 'artists');
   }
 
   /**
@@ -246,7 +246,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
       'start'           => $start,
     ));
 
-    return $response['songs'];
+    return $this->returnResponse($response, 'songs');
   }
 
   /**
@@ -285,7 +285,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
       'seed_catalog' => $seed_catalog
     ));
 
-    return $response['artists'];
+    return $this->returnResponse($response, 'artists');
   }
 
   /**
@@ -301,7 +301,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
       'sort'         => $sort,
     ));
 
-    return $response['terms'];
+    return $this->returnResponse($response, 'terms');
   }
 
   /**
@@ -324,7 +324,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
       'limit'           => $limit,
     ));
 
-    return $response;
+    return $this->returnResponse($response, 'artists');
   }
 
   /**
@@ -343,7 +343,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
       'limit'           => $limit,
     ));
 
-    return $response['terms'];
+    return $this->returnResponse($response, 'terms');
   }
 
   /**
@@ -356,7 +356,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
   {
     $response = $this->getForArtist('artist/urls');
 
-    return $response['urls'];
+    return $this->returnResponse($response, 'urls');
   }
 
   /**
@@ -374,7 +374,7 @@ class EchoNest_Api_Artist extends EchoNest_Api
       'start'           => $start,
     ));
 
-    return $response['video'];
+    return $this->returnResponse($response, 'video');
   }
 
   /**

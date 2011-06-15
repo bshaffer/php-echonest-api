@@ -1,6 +1,6 @@
 # PHP Echo Nest API
 
-A simple, Object Oriented API wrapper for the EchoNest Api written with PHP5.  
+A simple, Object Oriented API wrapper for the EchoNest Api written with PHP5.
 This library is modeled after the [php-github-api](https://github.com/ornicar/php-github-api) library built by [ornicar](https://github.com/ornicar)
 
 Uses [EchoNest API v4](http://developer.echonest.com/docs/v4/).
@@ -43,18 +43,11 @@ Cancels authentication.
 
 Next requests will not be authenticated
 
-## Artists
+## The Response
 
-For searching artists, getting artist information and music.
-Wraps [EchoNest Artist API](http://developer.echonest.com/docs/v4/artist.html).
+The API tries to return to you the information you typically need, and spare you information such as status codes, messages, etc, if
+the response was successful.  Below is an example of a fully rendered response.
 
-    $artistApi = $echonest->getArtistApi();
-
-### Search for artists by name
-
-    $results = $echonest->getArtistApi()->search(array('name' => 'Radiohead'));
-    print_r($results);
-    
       Array
       (
           [status] => Array
@@ -72,6 +65,42 @@ Wraps [EchoNest Artist API](http://developer.echonest.com/docs/v4/artist.html).
                           [id] => ARH6W4X1187B99274F
                       )
 
+              )
+
+      )
+
+Often times, the status information is not needed.  However, if you would like the API to return the full response (this is often
+needed when dealing with pagers, as the "total" and "start" parameters are passed outside of the "artists" array, for example),
+set the *raw* option to `true` for your API.
+
+    // pass options to getter
+    $response = $echonest->getArtistApi(array('raw' => true))->search(array('name' => 'Radiohead'));
+
+    // set options manually
+    $artistApi = $echonest->getArtistApi();
+    $artistApi->setOption('raw', true);
+    $response = $artistApi->search(array('name' => 'Radiohead'));
+    
+If you think this is dumb, let me know and I will consider making `raw` the default.
+
+## Artists
+
+For searching artists, getting artist information and music.
+Wraps [EchoNest Artist API](http://developer.echonest.com/docs/v4/artist.html).
+
+    $artistApi = $echonest->getArtistApi();
+
+### Search for artists by name
+
+    $results = $echonest->getArtistApi()->search(array('name' => 'Radiohead'));
+    print_r($results);
+
+      Array
+      (
+          [0] => Array
+              (
+                  [name] => Radiohead
+                  [id] => ARH6W4X1187B99274F
               )
 
       )
@@ -98,16 +127,16 @@ Api calls for getting data about songs.
 Wraps [EchoNest Song API](http://developer.echonest.com/docs/v4/song.html).
 
     $songApi = $echonest->getSongApi();
-    
+
 Please view the documentation in this project or on http://echonest.com to see all the options available
-  
+
 ## Playlists
 
 Api calls for generating playlists.
 Wraps [EchoNest Playlist API](http://developer.echonest.com/docs/v4/playlist.html).
 
     $playlistApi = $echonest->getPlaylistApi();
-    
+
 Please view the documentation in this project or on http://echonest.com to see all the options available
 
 ## Catalogs
@@ -116,7 +145,7 @@ API calls for managing personal catalogs.
 Wraps [EchoNest Catalog API](http://developer.echonest.com/docs/v4/catalog.html).
 
     $catalogApi = $echonest->getCatalogApi();
-    
+
 Please view the documentation in this project or on http://echonest.com to see all the options available
 
 ## Tracks
@@ -125,7 +154,7 @@ Methods for analyzing or getting info about tracks.
 Wraps [EchoNest Track API](http://developer.echonest.com/docs/v4/track.html).
 
     $trackApi = $echonest->getTrackApi();
-    
+
 Please view the documentation in this project or on http://echonest.com to see all the options available
 
 # To Do

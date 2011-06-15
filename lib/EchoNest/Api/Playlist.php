@@ -20,7 +20,7 @@ class EchoNest_Api_Playlist extends EchoNest_Api
   {
     $response = $this->client->get('playlist/static', $options);
 
-    return $response['songs'];
+    return $this->returnResponse($response, 'songs');
   }
   
   /**
@@ -34,7 +34,7 @@ class EchoNest_Api_Playlist extends EchoNest_Api
   {
     $response = $this->client->get('playlist/dynamic', $options);
 
-    return $response;
+    return $this->returnResponse($response);
   }
 
   /**
@@ -50,6 +50,6 @@ class EchoNest_Api_Playlist extends EchoNest_Api
       'session_id'  => $session_id,
     ));
 
-    return $response;
+    return $this->returnResponse($response);
   }
 }

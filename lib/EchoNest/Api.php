@@ -12,7 +12,7 @@ abstract class EchoNest_Api implements EchoNest_ApiInterface
     * The core EchoNest Client
     * @var EchoNest_Client
     */
-    protected 
+    protected
         $client,
         $options = array();
 
@@ -75,5 +75,14 @@ abstract class EchoNest_Api implements EchoNest_ApiInterface
     public function getOption($name, $default = null)
     {
         return isset($this->options[$name]) ? $this->options[$name] : $default;
+    }
+
+    protected function returnResponse($response, $key = null)
+    {
+        if (!is_null($key) && !$this->getOption('raw')) {
+            return $response[$key];
+        }
+
+        return $response;
     }
 }

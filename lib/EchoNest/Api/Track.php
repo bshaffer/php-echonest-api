@@ -26,7 +26,7 @@ class EchoNest_Api_Track extends EchoNest_Api
       'bucket' => $bucket,
     ));
 
-    return $response;
+    return $this->returnResponse($response);
   }
 
   /**
@@ -45,7 +45,7 @@ class EchoNest_Api_Track extends EchoNest_Api
       'bucket' => $bucket,
     ));
 
-    return $response;
+    return $this->returnResponse($response);
   }
   
   /**
@@ -63,7 +63,7 @@ class EchoNest_Api_Track extends EchoNest_Api
       'bucket' => $bucket,
     ));
 
-    return $response;
+    return $this->returnResponse($response);
   }
 
   /**
@@ -81,7 +81,7 @@ class EchoNest_Api_Track extends EchoNest_Api
           'bucket' => $bucket,
           ));
 
-      return $response;
+      return $this->returnResponse($response);
   }
 
     /**
@@ -104,6 +104,6 @@ class EchoNest_Api_Track extends EchoNest_Api
             'track'    => $track,
     ));
 
-    return $response;
+    return $this->returnResponse($response);
     }
 }

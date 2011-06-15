@@ -20,7 +20,7 @@ class EchoNest_Api_Song extends EchoNest_Api
   {
     $response = $this->client->get('song/search', $options);
 
-    return $response['songs'];
+    return $this->returnResponse($response, 'songs');
   }
   
   /**
@@ -40,7 +40,7 @@ class EchoNest_Api_Song extends EchoNest_Api
       'limit'  => $limit,
     ));
 
-    return $response['songs'];
+    return $this->returnResponse($response, 'songs');
   }
   /**
    * Identifies a song given Echo Nest Musical Fingerpint hash codes.
@@ -58,6 +58,6 @@ class EchoNest_Api_Song extends EchoNest_Api
       $response = $this->client->get('song/indentify', $options);
     }
 
-    return $response['songs'];
+    return $this->returnResponse($response, 'songs');
   }
 }

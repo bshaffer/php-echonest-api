@@ -24,7 +24,7 @@ class EchoNest_Api_Catalog extends EchoNest_Api
       'type'    => $type
     ));
 
-    return $response;
+    return $this->returnResponse($response);
   }
   
   /**
@@ -45,7 +45,7 @@ class EchoNest_Api_Catalog extends EchoNest_Api
       'data_type' => $data_type,
     ));
 
-    return $response;
+    return $this->returnResponse($response);
   }
   
   /**
@@ -61,7 +61,7 @@ class EchoNest_Api_Catalog extends EchoNest_Api
       'ticket'     => $ticket,
     ));
 
-    return $response;
+    return $this->returnResponse($response);
   }
   
   /**
@@ -78,7 +78,7 @@ class EchoNest_Api_Catalog extends EchoNest_Api
       $byName ? 'name' : 'id' => $id,
     ));
 
-    return $response['catalog'];
+    return $this->returnResponse($response, 'catalog');
   }
   
   /**
@@ -100,7 +100,7 @@ class EchoNest_Api_Catalog extends EchoNest_Api
       'bucket'          => $bucket,
     ));
 
-    return $response['catalog'];
+    return $this->returnResponse($response, 'catalog');
   }
   
   /**
@@ -124,7 +124,7 @@ class EchoNest_Api_Catalog extends EchoNest_Api
       'since'           => $since,
     ));
 
-    return $response['feed'];
+    return $this->returnResponse($response, 'feed');
   }
   
   /**
@@ -140,7 +140,7 @@ class EchoNest_Api_Catalog extends EchoNest_Api
       'id'              => $id,
     ));
 
-    return $response;
+    return $this->returnResponse($response);
   }
   
   /**
@@ -158,6 +158,6 @@ class EchoNest_Api_Catalog extends EchoNest_Api
       'start'           => $start,
     ));
 
-    return $response['catalogs'];
+    return $this->returnResponse($response, 'catalogs');
   }
 }
