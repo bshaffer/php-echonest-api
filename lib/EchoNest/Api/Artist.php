@@ -232,6 +232,32 @@ class EchoNest_Api_Artist extends EchoNest_Api
   }
 
   /**
+   * Extract artist names from text.
+   * http://developer.echonest.com/docs/v4/artist.html#extract-beta
+   *
+   * @param   string $text              the text to search for an artist's name
+   * @param   array   $options          visit the documentation above to see all available options.  Some options include:
+   * -  format           The format of the response (json, xml, jsonp).  JSON by default.
+   * -  results          The Number of results desired, 0 < results < 1000, (Default=15)
+   * -  limit            If true, limit the results to the given idspace or catalog
+   * -  max_familiarity  The maximum familiarity for returned artists (0.0 < familiarity < 1.0)
+   * -  min_familiarity  The minimum familiarity for returned artists (0.0 < familiarity < 1.0)
+   * -  max_hotttnesss   The maximum hotttnesss for returned artists (0.0 < hotttnesss < 1.0)
+   * -  min_hotttnesss   The minimum hotttnesss for returned artists (0.0 < hotttnesss < 1.0)
+   * -  sort             Sort terms based upon weight or frequency (familiarity-asc, hotttnesss-asc, familiarity-desc, hotttnesss-desc)
+   * -  callback         Required for jsonp requests.  the callback function for JSONP requests.
+   * @return  array                   array of news articles found
+   */
+  public function extract($text, $options = array())
+  {
+    $options['text'] = $text;
+
+    $response = $this->get('artist/extract', $options);
+
+    return $this->returnResponse($response, 'artists');
+  }
+
+  /**
    * Get a list of songs created by an artist.
    * http://developer.echonest.com/docs/v4/artist.html#songs
    *
