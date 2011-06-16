@@ -164,18 +164,22 @@ class EchoNest_Api_Artist extends EchoNest_Api
    * http://developer.echonest.com/docs/v4/artist.html#profile
    *
    * @param   string|array $bucket    indicates what data should be returned with each artist. possible values include:
-   *  - audio,
-   *  - biographies
-   *  - blogs
-   *  - familiarity
-   *  - hotttnesss
-   *  - images
-   *  - news
-   *  - reviews
-   *  - terms
-   *  - urls
-   *  - video
-   *  - id:CA1234123412341234
+   *  - audio                     returns up to the 15 most recent audio documents found on the web related to the artist
+   *  - biographies               returns up to the 15 most recent biographies found on the web related to the artist
+   *  - blogs                     returns up to the 15 most recent blogs found on the web related to the artist
+   *  - docs_count                returns document counts for each of the various artist document types
+   *  - familiarity               returns the familiarity for the artist
+   *  - hotttnesss                returns the hotttnesss for the artist
+   *  - images                    returns up to the 15 most recent images found on the web related to the artist
+   *  - news                      returns up to the 15 most recent news articles found on the web related to the artist
+   *  - reviews                   returns up to the 15 most recent reviews found on the web related to the artist
+   *  - songs                     returns up to the 15 hotttest songs for the artist
+   *  - terms                     returns links to this artist's pages on various sites
+   *  - urls                      returns up to the 15 most recent videos found on the web related to the artist
+   *  - video                     returns up to the 15 most recent videos found on the web related to the artist
+   *  - years_active              returns years active information for the artist
+   *  - id:[rosetta-catalog]      returns catalog specific information about the artist for the given catalog. See Project Rosetta Stone for details
+   *  - id:[Personal-Catalog-ID]  returns personal catalog specific information about the artist for the given catalog. See Project Rosetta Stone for details
    *  - id:musicbrainz
    *  - id:playme
    *  - id:7digital
