@@ -155,7 +155,7 @@ class EchoNest_Client
      *
      * @return  EchoNestApiTrack  the track API
      */
-    public function getCommitApi($options = array())
+    public function getTrackApi($options = array())
     {
         if(!isset($this->apis['track']))
         {
