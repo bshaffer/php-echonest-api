@@ -22,7 +22,7 @@ class EchoNest_Api_Song extends EchoNest_Api
 
     return $this->returnResponse($response, 'songs');
   }
-  
+
   /**
    * Get info about songs given a list of ids
    * http://developer.echonest.com/docs/v4/song.html#profile
@@ -52,10 +52,10 @@ class EchoNest_Api_Song extends EchoNest_Api
   public function identify($options)
   {
     if (isset($options['query'])) {
-      $response = $this->client->post('song/indentify', $options);
+      $response = $this->client->post('song/identify', $options);
     }
     else {
-      $response = $this->client->get('song/indentify', $options);
+      $response = $this->client->get('song/identify', $options);
     }
 
     return $this->returnResponse($response, 'songs');
