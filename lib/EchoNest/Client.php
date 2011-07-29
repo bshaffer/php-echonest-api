@@ -2,7 +2,7 @@
 
 /**
  * Simple PHP EchoNest API
- * 
+ *
  * @tutorial  http://EchoNest.com/ornicar/php-EchoNest-api/blob/master/README.markdown
  * @version   2.6
  * @author    Brent Shaffer <bshafs at gmail dot com>
@@ -68,7 +68,7 @@ class EchoNest_Client
     {
         return $this->authenticate(null);
     }
-  
+
     /**
      * Call any route, GET method
      * Ex: $api->get('repos/show/my-username/my-repo')
@@ -113,7 +113,7 @@ class EchoNest_Client
      * @param   EchoNest_HttpClient_Interface   a httpClient instance
      * @return  EchoNestApi          fluent interface
      */
-    public function setHttpClient(EchoNest_HttpClient_Interface $httpClient)
+    public function setHttpClient(EchoNest_HttpClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
 
