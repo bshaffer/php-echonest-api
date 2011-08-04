@@ -107,7 +107,7 @@ abstract class EchoNest_HttpClient implements EchoNest_HttpClientInterface
         $response = $this->decodeResponse($response, $options);
 
         if (isset($response['response']['status']['code']) && !in_array($response['response']['status']['code'], array(0, 200, 201))) {
-            throw new EchoNest_HttpClient_Exception($response['response']['status']['message'], (int) $response['headers']['http_code']);
+            throw new EchoNest_HttpClient_Exception($response['response']['status']['message'], (int) $response['response']['status']['code']);
         }
 
         return $response['response'];
