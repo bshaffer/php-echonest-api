@@ -97,7 +97,7 @@ class EchoNest_Api_Track extends EchoNest_Api
     public function upload($url, $wait = true, $filetype = null, $bucket = null, $track = null)
     {
         $response = $this->client->post('track/upload', array(
-            'urk'      => $url,
+            'url'      => $url,
             'wait'     => $wait,
             'filetype' => $filetype,
             'bucket'   => $bucket,
