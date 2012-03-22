@@ -168,15 +168,15 @@ Set up the sandbox api to begin with
 
 Fetch an array of all available assets
 
-    $assets = $sandbox->assets($start, $per_page = 100);
+    $assets = $sandboxApi->assets($start, $per_page = 100);
 
 Access an individual asset
 
-    $sandbox->access($id)
+    $sandboxApi->access($id)
 
 Access an array of assets
 
-    $sandbox->access($array)
+    $sandboxApi->access($array)
 
 
 
