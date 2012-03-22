@@ -70,37 +70,41 @@ Class SignatureCreation {
 /**
  * API calls for managing sandboxes
  *
- * @link      http://developer.echonest.com/docs/v4/catalog.html#overview
+ * @link      http://developer.echonest.com/docs/v4/sandbox.html#overview
  * @author    Syd Lawrence <sydlawrence at gmail dot com>
  * @license   MIT License
  */
 class EchoNest_Api_Sandbox extends EchoNest_Api
 {
 
-  protected $sandbox = "";
+  // the current sandbox key
+  protected $sandbox_key = "";
 
+  // the keys etc for the oauth
   protected $oauth_config = array
   (
     "consumer_key" => "",
     "consumer_secret" => "",
   );
 
-  function setSandbox($sandbox)
+  // set the current sandbox
+  function setSandbox($sandbox_key)
   {
-    if ($sandbox)
-      $this->sandbox = $sandbox;
+    if ($sandbox_key)
+      $this->sandbox_key = $sandbox_key;
     return $this;
   }
 
-  function setConfig($oauth_config)
+  // set the oauth config
+  function setOAuthConfig($config)
   {
     foreach ($this->oauth_config as $key => $val) {
 
-      if (!isset($oauth_config[$key]) || $oauth_config[$key] == "") {
+      if (!isset($config[$key]) || $config[$key] == "") {
         // @todo make this thrown an exception
         throw new Exception('Missing sandbox oauth config: '.$key);
       }
-      $this->oauth_config[$key] = $oauth_config[$key];
+      $this->oauth_config[$key] = $config[$key];
     }
     return $this;
 
@@ -109,17 +113,18 @@ class EchoNest_Api_Sandbox extends EchoNest_Api
 
   /**
    * Lists assets in a sandbox.
-   * http://developer.echonest.com/docs/v4/catalog.html#create
+   * http://developer.echonest.com/docs/v4/sandbox.html#list
    *
-   * @param   string  $name         The name of the catalog
-   * @param   string  $type         The type of the catalog (artist or song)
-   * @return  array                 response object
+   * @param   int    $start       The starting index of the assets
+   * @param   int    $per_page    How many assets to return per page
+   * @return  array               response object
    */
   function assets($start = 0, $per_page=100)
   {
 
+    // this one is simples
     $response = $this->client->get('sandbox/list', array(
-      'sandbox'    => $this->sandbox,
+      'sandbox'    => $this->sandbox_key,
       'results'    => $per_page,
       'start'      => $start
     ));
@@ -127,12 +132,23 @@ class EchoNest_Api_Sandbox extends EchoNest_Api
     return $this->returnResponse($response);
   }
 
-  function fetch($id)
+  /**
+   * Access assets inside a sandbox.
+   * http://developer.echonest.com/docs/v4/sandbox.html#access
+   *
+   * @param   int/array    $id       The id of the individual asset or an array of asset ids
+   * @return  array                  response object
+   */
+  function access($id)
   {
 
+    // this is the endpoint we want this time
     $endpoint = "sandbox/access";
-
+  
+    // used for nonce and timestamp
     $time = time();
+    
+    // set up the parameters
     $params = array(
       "api_key" => $this->client->getHttpClient()->getOption('api_key'),
       "id" => $id,
@@ -142,22 +158,26 @@ class EchoNest_Api_Sandbox extends EchoNest_Api
       "oauth_signature_method" => "HMAC-SHA1",
       "oauth_version" => "1.0",
       "oauth_consumer_key" => $this->oauth_config['consumer_key'],
-      "sandbox" => $this->sandbox
+      "sandbox" => $this->sandbox_key
     );
 
+    // create the base url
     $url = strtr($this->client->getHttpClient()->getOption('url'), array(
       ':api_version' => $this->client->getHttpClient()->getOption('api_version'),
       ':protocol'    => $this->client->getHttpClient()->getOption('protocol'),
       ':path'        => trim($endpoint, '/')
     ));
 
+    // generate the signature
     $sig = SignatureCreation::oauth_signature($url,$params, $this->oauth_config['consumer_secret']);
 
+    // add the signature to the params
     $params['oauth_signature'] = $sig;
 
-
+    // get the response
     $response = $this->client->get($endpoint, $params);
 
+    // return the response
     return $this->returnResponse($response);
 
   }

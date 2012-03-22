@@ -161,7 +161,7 @@ If you think this is dumb, let me know and I will consider making `raw` the defa
 
 Set up the sandbox api to begin with
 
-    $sandboxApi = $echonest->getSandboxApi()->setConfig(array(
+    $sandboxApi = $echonest->getSandboxApi()->setOAuthConfig(array(
       "consumer_key" => $consumer_key,
       "consumer_secret" => $consumer_secret
     ))->setSandbox($sandbox_key);
@@ -170,13 +170,13 @@ Fetch an array of all available assets
 
     $assets = $sandbox->assets($start, $per_page = 100);
 
-Fetch an individual asset
+Access an individual asset
 
-    $sandbox->fetch($id)
+    $sandbox->access($id)
 
-Fetch an array of assets
+Access an array of assets
 
-    $sandbox->fetch($array)
+    $sandbox->access($array)
 
 
 
