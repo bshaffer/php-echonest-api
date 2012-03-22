@@ -52,9 +52,6 @@ Class SignatureCreation {
       }
       $i++;
     }
-
-
-    echo $param_string."<br/>";  
     
     $data =  "GET&".urlencode($url). "&".urlencode($param_string);
 
@@ -128,8 +125,23 @@ class EchoNest_Api_Sandbox extends EchoNest_Api
       'results'    => $per_page,
       'start'      => $start
     ));
+    
+    $response = $this->returnResponse($response);
+    
+    $total = $response['total']; 
+    
+    $assets = $response['assets'];
+    
+    /*
+    leave out due to api limits
+    if (count($assets) < $total) {
+      $next = $this->assets($soFar);
+      $assets = array_merge($assets, $next);
+    }
+    */
+    
+    return $assets;
 
-    return $this->returnResponse($response);
   }
 
   /**
