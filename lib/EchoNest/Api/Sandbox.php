@@ -58,8 +58,7 @@ Class SignatureCreation {
 
     $key = $secret."&";
 
-    $sig = self::oauth_hmacsha1($key, $data);
-    return  $sig;
+    return self::oauth_hmacsha1($key, $data);
   }
 }
 
