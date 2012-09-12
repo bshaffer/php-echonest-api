@@ -291,7 +291,6 @@ class EchoNest_Api_Artist extends EchoNest_Api
    * @param   decimal $min_familiarity    the minimum familiarity for returned artists (0.0 < familiarity < 1.0)
    * @param   decimal $max_hotttnesss     the maximum hotttnesss for returned artists (0.0 < hotttnesss < 1.0)
    * @param   decimal $min_hotttnesss     the minimum hotttnesss for returned artists (0.0 < hotttnesss < 1.0)
-   * @param   bool    $reverse            if true, if true, return artists that are disimilar to the seeds
    * @param   bool    $limit              if true, limit the results to the given idspace or catalog
    * @param   string|array $seed_catalog  only give similars to those in a catalog or catalogs, An Echo Nest artist catalog identifier
    * @return  array                       array of similar artists found
@@ -310,7 +309,6 @@ class EchoNest_Api_Artist extends EchoNest_Api
       'min_familiarity' => $min_familiarity,
       'max_hotttnesss' => $max_hotttness,
       'min_hotttnesss' => $min_hotttness,
-      'reverse' => $reverse,
       'limit' => $limit,
       'seed_catalog' => $seed_catalog
     ));
