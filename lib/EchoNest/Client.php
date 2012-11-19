@@ -196,6 +196,21 @@ class EchoNest_Client
     }
 
     /**
+     * Get the sandbox API
+     *
+     * @return  EchoNest_Api_Sandbox  the sandbox API
+     */
+    public function getSandboxApi($options = array())
+    {
+        if(!isset($this->apis['sandbox']))
+        {
+            $this->apis['sandbox'] = new EchoNest_Api_Sandbox($this, $options);
+        }
+
+        return $this->apis['sandbox'];
+    }
+
+    /**
      * Inject another API instance
      *
      * @param   string                $name the API name
