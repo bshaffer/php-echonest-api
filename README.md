@@ -157,6 +157,30 @@ set the *raw* option to `true` for your API.
     
 If you think this is dumb, let me know and I will consider making `raw` the default.
 
+## Sandbox
+
+Set up the sandbox api to begin with
+
+    $sandboxApi = $echonest->getSandboxApi()->setOAuthConfig(array(
+      "consumer_key" => $consumer_key,
+      "consumer_secret" => $consumer_secret
+    ))->setSandbox($sandbox_key);
+
+Fetch an array of all available assets
+
+    $assets = $sandboxApi->assets($start, $per_page = 100);
+
+Access an individual asset
+
+    $sandboxApi->access($id)
+
+Access an array of assets
+
+    $sandboxApi->access($array)
+
+
+
+
 
 # To Do
 

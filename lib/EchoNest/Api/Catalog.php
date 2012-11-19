@@ -142,7 +142,27 @@ class EchoNest_Api_Catalog extends EchoNest_Api
 
     return $this->returnResponse($response);
   }
-  
+
+  /**
+   * Returns a list of all taste profiles that are similar to the given set of taste profiles.
+   * This method returns similar taste profiles of the given use type.
+   * Similarity search is restricted to taste profiles that were created with the caller's API key.
+   * http://developer.echonest.com/docs/v4/catalog.html#similar-beta
+   *
+   * @param   string  $id             The ID of the catalog
+   * @return  array                   response object
+   */
+
+
+  public function similar($id)
+  {
+    $response = $this->client->get("catalog/similar", array(
+      "id"            => $id
+    ));
+
+    return $this->returnResponse($response);
+  } 
+
   /**
    * Returns a list of all catalogs created on this key
    * http://developer.echonest.com/docs/v4/catalog.html#list
