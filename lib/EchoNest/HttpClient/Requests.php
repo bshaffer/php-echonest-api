@@ -6,7 +6,7 @@
  * @author    Brent Shaffer <bshafs at gmail dot com>
  * @license   MIT License
  */
-class EchoNest_HttpClient_Curl extends EchoNest_HttpClient
+class EchoNest_HttpClient_Requests extends EchoNest_HttpClient
 {
     /**
     * Send a request to the server, receive a response
@@ -26,57 +26,23 @@ class EchoNest_HttpClient_Curl extends EchoNest_HttpClient
               'api_key' => $this->options['api_key']
           ), $parameters);
         }
+        
+        $headers = array();
+        $headers['User-Agent'] = $this->options['user_agent'];
 
-        $curlOptions = array();
-
-        if (!empty($parameters))
-        {
+        if ('GET' === $httpMethod && !empty($parameters)) {
             $queryString = utf8_encode($this->buildQuery($parameters));
-
-            if('GET' === $httpMethod)
-            {
-                $url .= '?' . $queryString;
-            }
-            else
-            {
-                $curlOptions += array(
-                    CURLOPT_POST        => true,
-                    CURLOPT_POSTFIELDS  => $queryString
-                );
-            }
+            $url .= '?' . $queryString;
+            
+            $this->debug('send ' . $httpMethod . ' request: ' . $url);
+            $request = Requests::get($url, $headers);
+        } 
+        else {
+            $this->debug('send ' . $httpMethod . ' request: ' . $url);
+            $request = Requests::post($url, $headers, $parameters);
         }
 
-        $this->debug('send '.$httpMethod.' request: '.$url);
-
-        $curlOptions += array(
-            CURLOPT_URL             => $url,
-            CURLOPT_PORT            => $this->options['http_port'],
-            CURLOPT_USERAGENT       => $this->options['user_agent'],
-            CURLOPT_FOLLOWLOCATION  => true,
-            CURLOPT_RETURNTRANSFER  => true,
-            CURLOPT_TIMEOUT         => $this->options['timeout']
-        );
-
-        $response = $this->doCurlCall($curlOptions);
-
-        return $response['response'];
-    }
-  
-
-    protected function doCurlCall(array $curlOptions)
-    {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, $curlOptions);
-
-        $response = curl_exec($curl);
-        $headers = curl_getinfo($curl);
-        $errorNumber = curl_errno($curl);
-        $errorMessage = curl_error($curl);
-
-        curl_close($curl);
-
-        return compact('response', 'headers', 'errorNumber', 'errorMessage');
+        return $request->body;
     }
   
     protected function buildQuery($parameters)
